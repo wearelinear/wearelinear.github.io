@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noteworthy x LINEAR | Performance Audit</title>
+    <meta name="description" content="Meta Ads Audit and Creative Strategy for Noteworthy.">
+    
+    <!-- Fonts: Space Grotesk for Headings, Inter for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        linear: {
+                            black: '#09090b', 
+                            dark: '#18181b',
+                            card: '#27272a',
+                            accent: '#10b981', // Emerald-500
+                            accentHover: '#059669',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #09090b;
+            color: #f4f4f5;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+        .glass-nav {
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.4);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Reveal Animation Class */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+    <!-- Background Canvas -->
+    <canvas id="heroCanvas" class="fixed top-0 left-0 w-full h-screen -z-10 opacity-20 pointer-events-none"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 border-b border-transparent py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="font-display font-bold text-2xl tracking-tighter flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center group-hover:rotate-90 transition-transform duration-500">
+                    <i data-lucide="trending-up" class="text-black w-5 h-5"></i>
+                </div>
+                <span>LINEAR <span class="text-zinc-600 text-sm font-normal mx-2">×</span> NOTEWORTHY</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#metrics" class="hover:text-emerald-400 transition-colors">Metrics</a>
+                <a href="#segments" class="hover:text-emerald-400 transition-colors">Segments</a>
+                <a href="#creative" class="hover:text-emerald-400 transition-colors">Strategy</a>
+                <a href="#gameplan" class="hover:text-emerald-400 transition-colors">Game Plan</a>
+            </div>
+
+            <a href="#gameplan" class="bg-white text-black px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-emerald-400 hover:scale-105 transition-all duration-300">
+                Execute Plan
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center pt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#09090b]"></div>
+        
+        <div class="relative max-w-5xl mx-auto px-6 text-center z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-medium text-emerald-400 uppercase tracking-wider">Audit Period: Oct 14 - Nov 12</span>
+            </div>
+            
+            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-[1.1] animate-fade-in-up" style="animation-delay: 0.1s;">
+                Unlocking Scale <br />
+                <span class="text-zinc-600">Through Emotion.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+                Reviewing $66,306 in spend. Fragrance buyers need identity, not just utility. Our plan shifts the focus from "smelling good" to "smelling like <strong>you</strong>."
+            </p>
+            
+            <!-- High Level Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto animate-fade-in-up" style="animation-delay: 0.3s;">
+                <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-emerald-500/30 transition-all">
+                    <p class="text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Total Spend</p>
+                    <p class="text-2xl md:text-3xl font-display font-bold text-white">$66,306</p>
+                </div>
+                <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-emerald-500/30 transition-all">
+                    <p class="text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Current ROAS</p>
+                    <p class="text-2xl md:text-3xl font-display font-bold text-emerald-400">1.15x</p>
+                </div>
+                <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-emerald-500/30 transition-all">
+                    <p class="text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Current CTR</p>
+                    <p class="text-2xl md:text-3xl font-display font-bold text-orange-400">1.21%</p>
+                </div>
+                <div class="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-emerald-500/30 transition-all">
+                    <p class="text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Target Hook</p>
+                    <p class="text-2xl md:text-3xl font-display font-bold text-emerald-400">40%+</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Metrics & Levers -->
+    <section id="metrics" class="py-24 border-y border-zinc-900 bg-zinc-900/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal-on-scroll">
+                <div>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Performance Breakdown</h2>
+                    <p class="text-zinc-400 text-lg max-w-xl">CTR is the primary bottleneck. A 1.21% click-through rate indicates the current creative is failing to stop the scroll.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Detailed Metrics Table -->
+                <div class="lg:col-span-8 glass-panel rounded-2xl overflow-hidden reveal-on-scroll">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="border-b border-zinc-800 bg-zinc-900/50">
+                                <th class="p-6 text-xs uppercase text-zinc-500 font-bold tracking-wider">Metric</th>
+                                <th class="p-6 text-xs uppercase text-zinc-500 font-bold tracking-wider">Result</th>
+                                <th class="p-6 text-xs uppercase text-zinc-500 font-bold tracking-wider">Strategic Insight</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-zinc-800">
+                            <tr class="hover:bg-zinc-800/30 transition-colors">
+                                <td class="p-6 font-bold text-white">ROAS</td>
+                                <td class="p-6 text-orange-400 font-mono font-bold">1.15x</td>
+                                <td class="p-6 text-sm text-zinc-400">Below expectation for fragrance at this spend level.</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition-colors">
+                                <td class="p-6 font-bold text-white">CTR</td>
+                                <td class="p-6 text-orange-400 font-mono font-bold">1.21%</td>
+                                <td class="p-6 text-sm text-zinc-400">Low. Indicates "functional" rather than "emotional" creative.</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition-colors">
+                                <td class="p-6 font-bold text-white">CPM</td>
+                                <td class="p-6 text-white font-mono">$25.93</td>
+                                <td class="p-6 text-sm text-zinc-400">Normal for the niche.</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition-colors">
+                                <td class="p-6 font-bold text-white">AOV</td>
+                                <td class="p-6 text-white font-mono">$45.65</td>
+                                <td class="p-6 text-sm text-zinc-400">Low end. Need bundles to push >$60.</td>
+                            </tr>
+                            <tr class="hover:bg-zinc-800/30 transition-colors bg-emerald-900/5">
+                                <td class="p-6 font-bold text-white">CVR</td>
+                                <td class="p-6 text-emerald-400 font-mono font-bold">5.41%</td>
+                                <td class="p-6 text-sm text-zinc-400">High. Likely inflated/misattributed. <strong>Action: Verify on Triple Whale.</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Levers Cards -->
+                <div class="lg:col-span-4 space-y-6 reveal-on-scroll">
+                    <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl hover:border-emerald-500 transition-colors group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2">Lever 1: CTR</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            The fastest lever to pull. Improving CTR requires intentional creative strategy and disciplined testing. We must stop the scroll.
+                        </p>
+                    </div>
+
+                    <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl hover:border-blue-500 transition-colors group">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-display font-bold text-white mb-2">Lever 2: AOV</h3>
+                        <p class="text-sm text-zinc-400 leading-relaxed">
+                            Requires deeper work: product mix, bundles, and landing page tweaks to increase basket size.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Audience Segments -->
+    <section id="segments" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 reveal-on-scroll">
+                <h2 class="font-display text-3xl md:text-4xl font-bold mb-6">Audience Health</h2>
+                <div class="flex items-start gap-4 p-4 border border-orange-500/30 bg-orange-500/10 rounded-xl max-w-2xl">
+                    <i data-lucide="alert-triangle" class="w-6 h-6 text-orange-500 shrink-0 mt-1"></i>
+                    <div>
+                        <h4 class="text-orange-400 font-bold text-sm uppercase tracking-wide mb-1">Frequency Alert: 2.87</h4>
+                        <p class="text-sm text-zinc-400">This is too low for fragrance. Buyers need repetition and storytelling to convert. We are also missing "Social Engagers" in our MOF targeting.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal-on-scroll">
+                <!-- Segment 1 -->
+                <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-400 font-medium">Prospecting</span>
+                        <span class="font-mono text-orange-400 font-bold">0.81x ROAS</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white mb-2">$55,554 Spend</h3>
+                    <p class="text-sm text-zinc-500 mt-4 border-t border-zinc-800 pt-4">
+                        Low but expected for cold traffic. Aggressive creative testing is essential here to find winners.
+                    </p>
+                </div>
+
+                <!-- Segment 2 -->
+                <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4">
+                        <div class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></div>
+                    </div>
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 rounded-full bg-zinc-800 text-xs text-zinc-400 font-medium">Engaged (Site)</span>
+                        <span class="font-mono text-yellow-400 font-bold">1.07x ROAS</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white mb-2">$3,387 Spend</h3>
+                    <p class="text-sm text-zinc-500 mt-4 border-t border-zinc-800 pt-4">
+                        Underweighted. <strong class="text-white">Action:</strong> Add IG/FB Engagers to this pool immediately.
+                    </p>
+                </div>
+
+                <!-- Segment 3 -->
+                <div class="bg-zinc-900/50 border border-zinc-800 p-8 rounded-2xl border-emerald-500/20">
+                    <div class="flex justify-between items-start mb-6">
+                        <span class="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs font-medium">Existing Customers</span>
+                        <span class="font-mono text-emerald-400 font-bold">3.75x ROAS</span>
+                    </div>
+                    <h3 class="text-2xl font-display font-bold text-white mb-2">$7,357 Spend</h3>
+                    <p class="text-sm text-zinc-500 mt-4 border-t border-zinc-800 pt-4">
+                        Extremely profitable. Ensure this revenue is incremental and not cannibalizing email/SMS.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Creative Strategy -->
+    <section id="creative" class="py-24 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-on-scroll">
+                <h2 class="font-display text-3xl md:text-5xl font-bold mb-6">The Pivot: Selling Identity</h2>
+                <p class="text-zinc-400 text-lg">
+                    Our review of 180 ads shows that only <strong>13%</strong> are winners. The current mix is too functional. We need to move from "Smelling Good" to "Smelling Like You."
+                </p>
+            </div>
+
+            <!-- Creative Distribution Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 reveal-on-scroll">
+                <div class="bg-zinc-950 border border-zinc-800 p-8 rounded-2xl flex flex-col justify-center items-center text-center">
+                    <div class="text-5xl font-display font-bold text-zinc-700 mb-2">180</div>
+                    <div class="text-sm text-zinc-500 uppercase tracking-wide">Ads Deployed</div>
+                </div>
+                <div class="bg-zinc-950 border border-zinc-800 p-8 rounded-2xl flex flex-col justify-center items-center text-center">
+                    <div class="text-5xl font-display font-bold text-white mb-2">42</div>
+                    <div class="text-sm text-zinc-500 uppercase tracking-wide">> 5 Purchases</div>
+                </div>
+                <div class="bg-zinc-950 border border-zinc-800 p-8 rounded-2xl flex flex-col justify-center items-center text-center border-emerald-500/30">
+                    <div class="text-5xl font-display font-bold text-emerald-500 mb-2">24</div>
+                    <div class="text-sm text-zinc-500 uppercase tracking-wide">> 10 Purchases (Winners)</div>
+                </div>
+            </div>
+
+            <!-- 7 Angles Grid -->
+            <h3 class="font-display text-2xl font-bold mb-8 reveal-on-scroll">7 Winning Angles to Test</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal-on-scroll">
+                <!-- Card 1 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="fingerprint" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Identity</h4>
+                    <p class="text-sm text-zinc-400">"Smell like you. Not like everyone else."</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="heart" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Emotion/Mood</h4>
+                    <p class="text-sm text-zinc-400">"Warm, cozy, unforgettable." Morning light.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="search" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Discovery</h4>
+                    <p class="text-sm text-zinc-400">"Take the quiz. Try the kit. Remove friction."</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="flask-conical" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Quality/Craft</h4>
+                    <p class="text-sm text-zinc-400">Macro shots, Made in USA, Niche notes.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="users" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Social Proof</h4>
+                    <p class="text-sm text-zinc-400">"The quiz nailed it. Finally found my scent."</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all">
+                    <i data-lucide="columns" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Comparison</h4>
+                    <p class="text-sm text-zinc-400">"Designer scents smell generic. Yours shouldn't."</p>
+                </div>
+                <!-- Card 7 -->
+                <div class="glass-panel p-6 rounded-xl group hover:border-emerald-500/50 transition-all lg:col-span-2">
+                    <i data-lucide="gift" class="w-8 h-8 text-zinc-400 mb-4 group-hover:text-emerald-500 transition-colors"></i>
+                    <h4 class="font-bold text-white mb-2">Gifting</h4>
+                    <p class="text-sm text-zinc-400">"Give a scent story, not just a bottle."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Execution Tactics -->
+    <section id="execution" class="py-24 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 reveal-on-scroll">
+                <div>
+                    <h3 class="font-display text-3xl font-bold mb-8">6 Formats Required</h3>
+                    <div class="space-y-4">
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="video" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">UGC Storytelling</h4>
+                                <p class="text-sm text-zinc-400">"Why I switched." (TOF/MOF)</p>
+                            </div>
+                        </div>
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="sun" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Lifestyle Video</h4>
+                                <p class="text-sm text-zinc-400">Mood, sunset, city scenes. (TOF)</p>
+                            </div>
+                        </div>
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="box" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Discovery Tutorial</h4>
+                                <p class="text-sm text-zinc-400">Quiz on screen + Unboxing. (MOF)</p>
+                            </div>
+                        </div>
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="message-square" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Testimonial Montage</h4>
+                                <p class="text-sm text-zinc-400">Reviews with scent note overlays. (MOF/BOF)</p>
+                            </div>
+                        </div>
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="image" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Static Hero + Review</h4>
+                                <p class="text-sm text-zinc-400">Bottle + Quote + Discount. (BOF)</p>
+                            </div>
+                        </div>
+                        <!-- Format Item -->
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-900/30 border border-zinc-800">
+                            <div class="bg-emerald-500/10 p-2 rounded-lg">
+                                <i data-lucide="columns" class="w-5 h-5 text-emerald-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold">Comparison Video</h4>
+                                <p class="text-sm text-zinc-400">Noteworthy vs. Dept Store Brands. (TOF)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Funnel Messaging -->
+                <div>
+                    <h3 class="font-display text-3xl font-bold mb-8">Funnel Messaging</h3>
+                    <div class="space-y-6">
+                        <div class="p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+                            <span class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Top of Funnel (Cold)</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Spark Curiosity</h4>
+                            <p class="text-emerald-400 italic">"There is a scent made for you. Still searching for your signature?"</p>
+                        </div>
+                        <div class="p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+                            <span class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Middle of Funnel (Warm)</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Reduce Hesitation</h4>
+                            <p class="text-emerald-400 italic">"Finding the right scent should be easy. Take our quiz and try the kit."</p>
+                        </div>
+                        <div class="p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+                            <span class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 block">Bottom of Funnel (Hot)</span>
+                            <h4 class="text-xl font-bold text-white mb-2">Emotional Payoff</h4>
+                            <p class="text-emerald-400 italic">"Your perfect scent is waiting. Use your 25% credit today."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Plan / CTA -->
+    <section id="gameplan" class="py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-emerald-900/10 radial-gradient"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <h2 class="font-display text-5xl font-bold mb-12">The Game Plan</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-left mb-16">
+                <div class="p-6 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-xl hover:border-emerald-500/50 transition-colors">
+                    <span class="text-4xl font-display font-bold text-zinc-700 mb-4 block">01</span>
+                    <h4 class="font-bold text-white mb-2">Deep Research</h4>
+                    <p class="text-sm text-zinc-400">Analyze past winners. Map "Identity" angles.</p>
+                </div>
+                <div class="p-6 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-xl hover:border-emerald-500/50 transition-colors">
+                    <span class="text-4xl font-display font-bold text-zinc-700 mb-4 block">02</span>
+                    <h4 class="font-bold text-white mb-2">Sprint</h4>
+                    <p class="text-sm text-zinc-400">Launch 4 net new assets weekly. Modular hooks.</p>
+                </div>
+                <div class="p-6 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-xl hover:border-emerald-500/50 transition-colors">
+                    <span class="text-4xl font-display font-bold text-zinc-700 mb-4 block">03</span>
+                    <h4 class="font-bold text-white mb-2">Scale</h4>
+                    <p class="text-sm text-zinc-400">Kill losers fast. Scale winners. Document library.</p>
+                </div>
+                <div class="p-6 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-xl hover:border-emerald-500/50 transition-colors">
+                    <span class="text-4xl font-display font-bold text-zinc-700 mb-4 block">04</span>
+                    <h4 class="font-bold text-white mb-2">Targets</h4>
+                    <p class="text-sm text-emerald-400 font-bold">CTR: 2.0%+</p>
+                    <p class="text-sm text-emerald-400 font-bold">Hook: 40%+</p>
+                </div>
+            </div>
+
+            <button onclick="alert('Production Sprint Initialized.')" class="bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-4 px-12 rounded-full text-lg transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:scale-105">
+                Start Creative Sprint
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 py-12 bg-black">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-zinc-600 text-sm">
+            <div class="flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                <span class="font-bold tracking-tight">LINEAR</span>
+            </div>
+            <div>&copy; 2025 Linear Growth Partners. Confidential Audit.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Encapsulate in IIFE
+        (function() {
+            lucide.createIcons();
+
+            // Scroll Reveal Logic
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+            // Navbar Scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass-nav');
+                    navbar.classList.remove('py-4');
+                    navbar.classList.add('py-2');
+                } else {
+                    navbar.classList.remove('glass-nav');
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                }
+            });
+
+            // Background Animation (Linear Style - Subtle Particles)
+            const canvas = document.getElementById('heroCanvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let w, h;
+                let particles = [];
+
+                function resize() {
+                    w = canvas.width = window.innerWidth;
+                    h = canvas.height = window.innerHeight;
+                }
+                window.addEventListener('resize', resize);
+                resize();
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * w;
+                        this.y = Math.random() * h;
+                        this.vx = (Math.random() - 0.5) * 0.3;
+                        this.vy = (Math.random() - 0.5) * 0.3;
+                        this.size = Math.random() * 2;
+                        this.alpha = Math.random() * 0.5;
+                    }
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        if(this.x < 0) this.x = w;
+                        if(this.x > w) this.x = 0;
+                        if(this.y < 0) this.y = h;
+                        if(this.y > h) this.y = 0;
+                    }
+                    draw() {
+                        ctx.fillStyle = `rgba(16, 185, 129, ${this.alpha})`; // Emerald
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                for(let i=0; i<40; i++) particles.push(new Particle());
+
+                function animate() {
+                    ctx.clearRect(0, 0, w, h);
+                    particles.forEach(p => {
+                        p.update();
+                        p.draw();
+                    });
+                    
+                    // Connections
+                    ctx.strokeStyle = 'rgba(16, 185, 129, 0.05)';
+                    for(let i=0; i<particles.length; i++) {
+                        for(let j=i+1; j<particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            if(dist < 150) {
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+        })();
+    </script>
+</body>
+</html>
