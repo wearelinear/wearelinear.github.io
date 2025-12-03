@@ -1,274 +1,363 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  TrendingUp, 
-  DollarSign, 
-  MousePointerClick, 
-  Percent, 
-  BarChart3, 
-  Info,
-  ArrowRight,
-  Target,
-  Zap,
-  ShoppingBag,
-  Users,
-  Lightbulb
-} from 'lucide-react';
-
-// Moved InputCard OUTSIDE the main component to prevent re-rendering/focus loss
-const InputCard = ({ label, value, setValue, unit, icon: Icon, step = 0.1, min = 0, max = 1000, desc }) => (
-  <div className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-zinc-700 transition-colors group h-full flex flex-col">
-    <div className="flex items-start gap-4 mb-6">
-      <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:text-indigo-300 group-hover:bg-indigo-500/20 transition-all shrink-0">
-        <Icon size={24} />
-      </div>
-      <div>
-        <h3 className="font-medium text-zinc-100 text-lg">{label}</h3>
-        <p className="text-sm text-zinc-500 mt-1 leading-relaxed">{desc}</p>
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear - ROAS Matrix & Strategy</title>
     
-    <div className="relative mt-auto">
-      <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-        <span className="text-zinc-500 font-medium text-lg">{unit === '$' ? '$' : ''}</span>
-      </div>
-      <input 
-        type="number" 
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => {
-           // Handle empty input to allow typing
-           const val = e.target.value === '' ? '' : parseFloat(e.target.value);
-           setValue(val);
-        }}
-        onBlur={(e) => {
-           // Reset to 0 if left empty on blur
-           if (e.target.value === '') setValue(0);
-        }}
-        className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-8 pr-12 text-3xl font-bold text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 transition-all placeholder-zinc-700"
-      />
-      <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-        <span className="text-zinc-500 font-medium text-lg">{unit === '%' ? '%' : ''}</span>
-      </div>
-    </div>
-  </div>
-);
-
-// New Detailed Strategy Card
-const StrategyCard = ({ title, icon: Icon, metric, definition, tactics }) => (
-  <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6 hover:border-zinc-700 hover:bg-zinc-900/60 transition-all">
-    <div className="flex items-center gap-3 mb-4">
-      <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
-        <Icon size={24} />
-      </div>
-      <div>
-        <h3 className="text-xl font-bold text-white">{title}</h3>
-        <p className="text-xs uppercase tracking-wider font-semibold text-indigo-400">Optimize {metric}</p>
-      </div>
-    </div>
-    <p className="text-zinc-400 mb-8 text-sm leading-relaxed border-b border-zinc-800 pb-6">{definition}</p>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <div className="space-y-6">
-      {tactics.map((tactic, i) => (
-        <div key={i} className="flex gap-4">
-            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-300 shadow-sm">{i+1}</span>
-            <div>
-                <h5 className="text-zinc-200 font-semibold text-sm mb-1">{tactic.title}</h5>
-                <p className="text-zinc-500 text-xs leading-relaxed">{tactic.desc}</p>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        /* Custom scrollbar for cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09090b; }
+        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-100 antialiased selection:bg-indigo-500/30">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useMemo } = React;
+
+        // --- ICONS (Inline to avoid external dependencies) ---
+        const IconBase = ({ children, size = 24, className = "" }) => (
+            <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width={size} 
+                height={size} 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className={className}
+            >
+                {children}
+            </svg>
+        );
+
+        const Zap = (props) => (
+            <IconBase {...props}>
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </IconBase>
+        );
+
+        const MousePointerClick = (props) => (
+            <IconBase {...props}>
+                <path d="M14 4.1 12 6" />
+                <path d="m5.1 8-2.9-.8" />
+                <path d="m6 12-1.9 2" />
+                <path d="M7.2 2.2 8 5.1" />
+                <path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z" />
+            </IconBase>
+        );
+
+        const DollarSign = (props) => (
+            <IconBase {...props}>
+                <line x1="12" x2="12" y1="2" y2="22" />
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </IconBase>
+        );
+
+        const ShoppingBag = (props) => (
+            <IconBase {...props}>
+                <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                <path d="M3 6h18" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+            </IconBase>
+        );
+
+        const Users = (props) => (
+            <IconBase {...props}>
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </IconBase>
+        );
+
+        const Target = (props) => (
+            <IconBase {...props}>
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+            </IconBase>
+        );
+
+        const Lightbulb = (props) => (
+            <IconBase {...props}>
+                <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+                <path d="M9 18h6" />
+                <path d="M10 22h4" />
+            </IconBase>
+        );
+
+
+        // --- COMPONENTS ---
+
+        const InputCard = ({ label, value, setValue, unit, icon: Icon, step = 0.1, min = 0, max = 1000, desc }) => (
+            <div className="bg-zinc-900/50 border border-zinc-800 p-6 rounded-2xl hover:border-zinc-700 transition-colors group h-full flex flex-col">
+                <div className="flex items-start gap-4 mb-6">
+                <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:text-indigo-300 group-hover:bg-indigo-500/20 transition-all shrink-0">
+                    <Icon size={24} />
+                </div>
+                <div>
+                    <h3 className="font-medium text-zinc-100 text-lg">{label}</h3>
+                    <p className="text-sm text-zinc-500 mt-1 leading-relaxed">{desc}</p>
+                </div>
+                </div>
+                
+                <div className="relative mt-auto">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <span className="text-zinc-500 font-medium text-lg">{unit === '$' ? '$' : ''}</span>
+                </div>
+                <input 
+                    type="number" 
+                    min={min}
+                    max={max}
+                    step={step}
+                    value={value}
+                    onChange={(e) => {
+                        const val = e.target.value === '' ? '' : parseFloat(e.target.value);
+                        setValue(val);
+                    }}
+                    onBlur={(e) => {
+                        if (e.target.value === '') setValue(0);
+                    }}
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-xl py-4 pl-8 pr-12 text-3xl font-bold text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500/50 transition-all placeholder-zinc-700"
+                />
+                <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                    <span className="text-zinc-500 font-medium text-lg">{unit === '%' ? '%' : ''}</span>
+                </div>
+                </div>
             </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
+        );
 
-const RoasMatrix = () => {
-  // State for the 4 key metrics
-  // Default values: CTR 1.5%, CPM $25, AOV $80, CVR 2.5%
-  const [ctr, setCtr] = useState(1.5);
-  const [cpm, setCpm] = useState(25);
-  const [aov, setAov] = useState(80);
-  const [cvr, setCvr] = useState(2.5);
-
-  // Calculate ROAS
-  // Formula: (CTR * AOV * CVR) / CPM * 1000
-  const calculateROAS = (currentCtr, currentCpm, currentAov, currentCvr) => {
-    if (currentCpm === 0) return 0;
-    const ctrDecimal = currentCtr / 100;
-    const cvrDecimal = currentCvr / 100;
-    const roas = (ctrDecimal * currentAov * cvrDecimal) / currentCpm * 1000;
-    return roas;
-  };
-
-  const currentRoas = calculateROAS(ctr, cpm, aov, cvr);
-
-  // Detailed Strategy Data
-  const strategies = [
-    {
-      title: "Creative Efficiency",
-      metric: "CTR",
-      icon: MousePointerClick,
-      definition: "CTR measures how effectively your creative 'stops the scroll'. A low CTR suggests your visual hook or headline isn't resonating with the target audience.",
-      tactics: [
-        { title: "The 3-Second Rule", desc: "Front-load your main hook or value proposition immediately. If the user isn't intrigued in the first 3 seconds, they scroll past." },
-        { title: "Pattern Interrupts", desc: "Use visuals that break the aesthetic flow of the feed. High contrast, unusual motion, or direct eye contact can spike attention." },
-        { title: "Format Diversity", desc: "Don't rely on one format. Rotate Static Images, UGC (User Generated Content), and High-Fidelity Video to prevent ad fatigue." }
-      ]
-    },
-    {
-      title: "Auction Dynamics",
-      metric: "CPM",
-      icon: DollarSign,
-      definition: "CPM is the price of entry. While market-driven, it is heavily influenced by your 'Relevance Score'—platforms charge less for ads that users actually enjoy.",
-      tactics: [
-        { title: "Engagement is Currency", desc: "Platforms discount ads with high engagement (likes, shares, watch time). Make ads that feel native to the platform, not intrusive." },
-        { title: "Broaden Audiences", desc: "Hyper-targeting is expensive. Modern algorithms work best with broad audiences (or 'Open Targeting'), letting AI find the buyers." },
-        { title: "Placement Liquidity", desc: "Allow ads to run on all placements (Reels, Stories, Feed) automatically. This lets the algorithm find the cheapest inventory available." }
-      ]
-    },
-    {
-      title: "Basket Architecture",
-      metric: "AOV",
-      icon: ShoppingBag,
-      definition: "Increasing Average Order Value is the highest-leverage activity. It improves ROAS immediately without needing to change your ad performance.",
-      tactics: [
-        { title: "Strategic Bundling", desc: "Don't just sell single items. Create 'Starter Kits' or 'Volume Breaks' (e.g., Buy 2, Save 20%) to incentivize larger carts." },
-        { title: "One-Click Upsells", desc: "Implement post-purchase offers immediately after checkout. The credit card is already entered, making friction near zero." },
-        { title: "Shipping Thresholds", desc: "Set your free shipping threshold 15-20% higher than your current median AOV to nudge customers to add 'one more thing'." }
-      ]
-    },
-    {
-      title: "Funnel Optimization",
-      metric: "CVR",
-      icon: Target,
-      definition: "CVR measures the effectiveness of your destination. If you have high clicks but low sales, your landing page is the bottleneck.",
-      tactics: [
-        { title: "Ad-to-Page Congruence", desc: "Ensure the headline and imagery on your Landing Page match the Ad exactly. A disconnect here causes immediate bounce." },
-        { title: "Mobile Speed & UX", desc: "Every second of load time drops conversions by ~4%. Ensure checkout forms are simplified and 'Add to Cart' is sticky on mobile." },
-        { title: "Above-Fold Social Proof", desc: "Place trusted reviews, star ratings, or 'As Seen In' logos immediately visible on the landing page to build instant credibility." }
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-indigo-500/30">
-      {/* Background Gradients */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
-        {/* Header */}
-        <header className="mb-12 text-center">
-          {/* Logo from URL */}
-          <div className="flex justify-center mb-8">
-            <img 
-              src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" 
-              alt="Linear Logo" 
-              className="h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
-            />
-          </div>
-          
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-indigo-400 mb-6">
-            <Zap size={14} /> ROAS Calculator & Strategy
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">
-            <span className="text-white">Predict Your </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Profitability</span>
-          </h1>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-            Input your key metrics to calculate Return on Ad Spend and unlock strategic levers to improve efficiency.
-          </p>
-        </header>
-
-        {/* Main Calculator Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
-          
-          {/* Inputs Column */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <InputCard 
-              label="CTR (Click Through Rate)" 
-              desc="Percentage of people who click your ad"
-              value={ctr} 
-              setValue={setCtr} 
-              unit="%" 
-              icon={MousePointerClick}
-              step={0.01}
-              max={10}
-            />
-            <InputCard 
-              label="CPM (Cost Per Mille)" 
-              desc="Cost per 1,000 impressions"
-              value={cpm} 
-              setValue={setCpm} 
-              unit="$" 
-              icon={DollarSign}
-              step={0.5}
-              max={100}
-            />
-            <InputCard 
-              label="AOV (Avg Order Value)" 
-              desc="Average spent per customer"
-              value={aov} 
-              setValue={setAov} 
-              unit="$" 
-              icon={ShoppingBag}
-              step={1}
-              max={500}
-            />
-            <InputCard 
-              label="CVR (Conversion Rate)" 
-              desc="Percentage of clicks that buy"
-              value={cvr} 
-              setValue={setCvr} 
-              unit="%" 
-              icon={Users}
-              step={0.1}
-              max={10}
-            />
-          </div>
-
-          {/* Result Column */}
-          <div className="lg:col-span-5 flex flex-col">
-            <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex-1 flex flex-col items-center justify-center text-center relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-50 group-hover:opacity-100 transition-opacity" />
-              
-              <h3 className="text-zinc-400 font-medium mb-2 relative z-10">PROJECTED ROAS</h3>
-              <div className={`text-8xl font-bold tracking-tighter mb-4 relative z-10 transition-all duration-500 drop-shadow-2xl ${
-                  currentRoas > 4 ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300' : 
-                  currentRoas > 2 ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : 
-                  'text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400'
-                }`}>
-                {currentRoas.toFixed(2)}x
-              </div>
+        const StrategyCard = ({ title, icon: Icon, metric, definition, tactics }) => (
+            <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6 hover:border-zinc-700 hover:bg-zinc-900/60 transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400">
+                    <Icon size={24} />
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-white">{title}</h3>
+                    <p className="text-xs uppercase tracking-wider font-semibold text-indigo-400">Optimize {metric}</p>
+                </div>
+                </div>
+                <p className="text-zinc-400 mb-8 text-sm leading-relaxed border-b border-zinc-800 pb-6">{definition}</p>
+                
+                <div className="space-y-6">
+                {tactics.map((tactic, i) => (
+                    <div key={i} className="flex gap-4">
+                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-300 shadow-sm">{i+1}</span>
+                        <div>
+                            <h5 className="text-zinc-200 font-semibold text-sm mb-1">{tactic.title}</h5>
+                            <p className="text-zinc-500 text-xs leading-relaxed">{tactic.desc}</p>
+                        </div>
+                    </div>
+                ))}
+                </div>
             </div>
-          </div>
-        </div>
+        );
 
-        {/* Detailed Strategy Section */}
-        <div className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-              <Lightbulb className="text-indigo-400" size={32} />
-              Growth Strategy Playbook
-            </h2>
-            <div className="hidden md:block text-sm text-zinc-500 max-w-sm text-right">
-              Actionable steps to improve each variable of the ROAS equation.
-            </div>
-          </div>
+        const RoasMatrix = () => {
+            const [ctr, setCtr] = useState(1.5);
+            const [cpm, setCpm] = useState(25);
+            const [aov, setAov] = useState(80);
+            const [cvr, setCvr] = useState(2.5);
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {strategies.map((strategy, idx) => (
-              <StrategyCard key={idx} {...strategy} />
-            ))}
-          </div>
-        </div>
+            const calculateROAS = (currentCtr, currentCpm, currentAov, currentCvr) => {
+                if (currentCpm === 0) return 0;
+                const ctrDecimal = currentCtr / 100;
+                const cvrDecimal = currentCvr / 100;
+                const roas = (ctrDecimal * currentAov * cvrDecimal) / currentCpm * 1000;
+                return roas;
+            };
 
-      </div>
-    </div>
-  );
-};
+            const currentRoas = calculateROAS(ctr, cpm, aov, cvr);
 
-export default RoasMatrix;
+            const strategies = [
+                {
+                title: "Creative Efficiency",
+                metric: "CTR",
+                icon: MousePointerClick,
+                definition: "CTR measures how effectively your creative 'stops the scroll'. A low CTR suggests your visual hook or headline isn't resonating with the target audience.",
+                tactics: [
+                    { title: "The 3-Second Rule", desc: "Front-load your main hook or value proposition immediately. If the user isn't intrigued in the first 3 seconds, they scroll past." },
+                    { title: "Pattern Interrupts", desc: "Use visuals that break the aesthetic flow of the feed. High contrast, unusual motion, or direct eye contact can spike attention." },
+                    { title: "Format Diversity", desc: "Don't rely on one format. Rotate Static Images, UGC (User Generated Content), and High-Fidelity Video to prevent ad fatigue." }
+                ]
+                },
+                {
+                title: "Auction Dynamics",
+                metric: "CPM",
+                icon: DollarSign,
+                definition: "CPM is the price of entry. While market-driven, it is heavily influenced by your 'Relevance Score'—platforms charge less for ads that users actually enjoy.",
+                tactics: [
+                    { title: "Engagement is Currency", desc: "Platforms discount ads with high engagement (likes, shares, watch time). Make ads that feel native to the platform, not intrusive." },
+                    { title: "Broaden Audiences", desc: "Hyper-targeting is expensive. Modern algorithms work best with broad audiences (or 'Open Targeting'), letting AI find the buyers." },
+                    { title: "Placement Liquidity", desc: "Allow ads to run on all placements (Reels, Stories, Feed) automatically. This lets the algorithm find the cheapest inventory available." }
+                ]
+                },
+                {
+                title: "Basket Architecture",
+                metric: "AOV",
+                icon: ShoppingBag,
+                definition: "Increasing Average Order Value is the highest-leverage activity. It improves ROAS immediately without needing to change your ad performance.",
+                tactics: [
+                    { title: "Strategic Bundling", desc: "Don't just sell single items. Create 'Starter Kits' or 'Volume Breaks' (e.g., Buy 2, Save 20%) to incentivize larger carts." },
+                    { title: "One-Click Upsells", desc: "Implement post-purchase offers immediately after checkout. The credit card is already entered, making friction near zero." },
+                    { title: "Shipping Thresholds", desc: "Set your free shipping threshold 15-20% higher than your current median AOV to nudge customers to add 'one more thing'." }
+                ]
+                },
+                {
+                title: "Funnel Optimization",
+                metric: "CVR",
+                icon: Target,
+                definition: "CVR measures the effectiveness of your destination. If you have high clicks but low sales, your landing page is the bottleneck.",
+                tactics: [
+                    { title: "Ad-to-Page Congruence", desc: "Ensure the headline and imagery on your Landing Page match the Ad exactly. A disconnect here causes immediate bounce." },
+                    { title: "Mobile Speed & UX", desc: "Every second of load time drops conversions by ~4%. Ensure checkout forms are simplified and 'Add to Cart' is sticky on mobile." },
+                    { title: "Above-Fold Social Proof", desc: "Place trusted reviews, star ratings, or 'As Seen In' logos immediately visible on the landing page to build instant credibility." }
+                ]
+                }
+            ];
+
+            return (
+                <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-indigo-500/30">
+                {/* Background Gradients */}
+                <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+                    <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-indigo-600/10 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px]" />
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+                    {/* Header */}
+                    <header className="mb-12 text-center">
+                    <div className="flex justify-center mb-8">
+                        <img 
+                        src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" 
+                        alt="Linear Logo" 
+                        className="h-24 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+                        />
+                    </div>
+                    
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-indigo-400 mb-6">
+                        <Zap size={14} /> ROAS Calculator & Strategy
+                    </div>
+                    <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">
+                        <span className="text-white">Predict Your </span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Profitability</span>
+                    </h1>
+                    <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+                        Input your key metrics to calculate Return on Ad Spend and unlock strategic levers to improve efficiency.
+                    </p>
+                    </header>
+
+                    {/* Main Calculator Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24">
+                    
+                    {/* Inputs Column */}
+                    <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <InputCard 
+                        label="CTR (Click Through Rate)" 
+                        desc="Percentage of people who click your ad"
+                        value={ctr} 
+                        setValue={setCtr} 
+                        unit="%" 
+                        icon={MousePointerClick}
+                        step={0.01}
+                        max={10}
+                        />
+                        <InputCard 
+                        label="CPM (Cost Per Mille)" 
+                        desc="Cost per 1,000 impressions"
+                        value={cpm} 
+                        setValue={setCpm} 
+                        unit="$" 
+                        icon={DollarSign}
+                        step={0.5}
+                        max={100}
+                        />
+                        <InputCard 
+                        label="AOV (Avg Order Value)" 
+                        desc="Average spent per customer"
+                        value={aov} 
+                        setValue={setAov} 
+                        unit="$" 
+                        icon={ShoppingBag}
+                        step={1}
+                        max={500}
+                        />
+                        <InputCard 
+                        label="CVR (Conversion Rate)" 
+                        desc="Percentage of clicks that buy"
+                        value={cvr} 
+                        setValue={setCvr} 
+                        unit="%" 
+                        icon={Users}
+                        step={0.1}
+                        max={10}
+                        />
+                    </div>
+
+                    {/* Result Column */}
+                    <div className="lg:col-span-5 flex flex-col">
+                        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex-1 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 opacity-50 group-hover:opacity-100 transition-opacity" />
+                        
+                        <h3 className="text-zinc-400 font-medium mb-2 relative z-10">PROJECTED ROAS</h3>
+                        <div className={`text-8xl font-bold tracking-tighter mb-4 relative z-10 transition-all duration-500 drop-shadow-2xl ${
+                            currentRoas > 4 ? 'text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300' : 
+                            currentRoas > 2 ? 'text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400' : 
+                            'text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-400'
+                            }`}>
+                            {currentRoas.toFixed(2)}x
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    {/* Detailed Strategy Section */}
+                    <div className="mb-16">
+                    <div className="flex items-center justify-between mb-8">
+                        <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                        <Lightbulb className="text-indigo-400" size={32} />
+                        Growth Strategy Playbook
+                        </h2>
+                        <div className="hidden md:block text-sm text-zinc-500 max-w-sm text-right">
+                        Actionable steps to improve each variable of the ROAS equation.
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {strategies.map((strategy, idx) => (
+                        <StrategyCard key={idx} {...strategy} />
+                        ))}
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<RoasMatrix />);
+    </script>
+</body>
+</html>
