@@ -195,7 +195,7 @@
                 title: "Creative Efficiency",
                 metric: "CTR",
                 icon: MousePointerClick,
-                definition: "CTR measures how effectively your creative 'stops the scroll'. A low CTR suggests your visual hook or headline isn't resonating with the target audience.",
+                definition: "CTR measures how effectively your creative stops the scroll & triggers interest. A low CTR suggests your creative isn't resonating with the target audience.",
                 tactics: [
                     { title: "The 3-Second Rule", desc: "Front-load your main hook or value proposition immediately. If the user isn't intrigued in the first 3 seconds, they scroll past." },
                     { title: "Pattern Interrupts", desc: "Use visuals that break the aesthetic flow of the feed. High contrast, unusual motion, or direct eye contact can spike attention." },
@@ -206,20 +206,20 @@
                 title: "Auction Dynamics",
                 metric: "CPM",
                 icon: DollarSign,
-                definition: "CPM is the price of entry. While market-driven, it is heavily influenced by your 'Relevance Score'—platforms charge less for ads that users actually enjoy.",
+                definition: "CPM is the price of entry. While market-driven, it is heavily influenced by your 'Relevance Score' - platforms charge less for ads that users actually enjoy.",
                 tactics: [
                     { title: "Engagement is Currency", desc: "Platforms discount ads with high engagement (likes, shares, watch time). Make ads that feel native to the platform, not intrusive." },
                     { title: "Broaden Audiences", desc: "Hyper-targeting is expensive. Modern algorithms work best with broad audiences (or 'Open Targeting'), letting AI find the buyers." },
-                    { title: "Placement Liquidity", desc: "Allow ads to run on all placements (Reels, Stories, Feed) automatically. This lets the algorithm find the cheapest inventory available." }
+                    { title: "Placement Liquidity", desc: "By default, allow ads to run on all placements (Reels, Stories, Feed) automatically. This lets the algorithm find the cheapest inventory available." }
                 ]
                 },
                 {
-                title: "Basket Architecture",
+                title: "Cart Architecture",
                 metric: "AOV",
                 icon: ShoppingBag,
-                definition: "Increasing Average Order Value is the highest-leverage activity. It improves ROAS immediately without needing to change your ad performance.",
+                definition: "Increasing Average Order Value is usually the highest-leverage activity. It improves ROAS immediately without needing to change your ad performance.",
                 tactics: [
-                    { title: "Strategic Bundling", desc: "Don't just sell single items. Create 'Starter Kits' or 'Volume Breaks' (e.g., Buy 2, Save 20%) to incentivize larger carts." },
+                    { title: "Strategic Bundling", desc: "Don't just sell single items. Create 'Starter Kits' or 'Volume Breaks' (e.g., Buy 2, Save 20%) to incentivize larger carts (as long as the margins make sense)." },
                     { title: "One-Click Upsells", desc: "Implement post-purchase offers immediately after checkout. The credit card is already entered, making friction near zero." },
                     { title: "Shipping Thresholds", desc: "Set your free shipping threshold 15-20% higher than your current median AOV to nudge customers to add 'one more thing'." }
                 ]
@@ -228,10 +228,10 @@
                 title: "Funnel Optimization",
                 metric: "CVR",
                 icon: Target,
-                definition: "CVR measures the effectiveness of your destination. If you have high clicks but low sales, your landing page is the bottleneck.",
+                definition: "CVR measures the effectiveness of your website at converting traffic. If you have high clicks but low sales, your landing page could be the bottleneck.",
                 tactics: [
-                    { title: "Ad-to-Page Congruence", desc: "Ensure the headline and imagery on your Landing Page match the Ad exactly. A disconnect here causes immediate bounce." },
-                    { title: "Mobile Speed & UX", desc: "Every second of load time drops conversions by ~4%. Ensure checkout forms are simplified and 'Add to Cart' is sticky on mobile." },
+                    { title: "Ad-to-Page Congruence", desc: "Ensure the headline and imagery on your Landing Page match the Ads. A disconnect here can cause immediate bounce." },
+                    { title: "Mobile Speed & UX", desc: "Every second of load time drops conversions by ~4%. Also ensure checkout forms are simplified and 'Add to Cart' is sticky on mobile." },
                     { title: "Above-Fold Social Proof", desc: "Place trusted reviews, star ratings, or 'As Seen In' logos immediately visible on the landing page to build instant credibility." }
                 ]
                 }
@@ -253,20 +253,20 @@
                             <img 
                             src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" 
                             alt="Linear Logo" 
-                            className="h-14 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+                            className="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
                             />
                         </a>
                     </div>
                     
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-medium text-indigo-400 mb-3">
-                        <Zap size={14} /> ROAS Calculator & Strategy
+                        <Zap size={14} /> Free ROAS Calculator
                     </div>
                     <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-2">
                         <span className="text-white">Predict Your </span>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Profitability</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">ROAS</span>
                     </h1>
                     <p className="text-zinc-400 text-base max-w-xl mx-auto">
-                        Input metrics to calculate ROAS and unlock strategic efficiency levers.
+                        Input metrics to calculate Return On Ad Spend and identify strategic levers.
                     </p>
                     </header>
 
@@ -276,7 +276,7 @@
                     {/* Inputs Column */}
                     <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <InputCard 
-                        label="CTR (Click Rate)" 
+                        label="CTR (Click-Through Rate)" 
                         desc="% of people who click your ad"
                         value={ctr} 
                         setValue={setCtr} 
@@ -286,7 +286,7 @@
                         max={10}
                         />
                         <InputCard 
-                        label="CPM (Cost/Mille)" 
+                        label="CPM (Cost per Mille)" 
                         desc="Cost per 1,000 impressions"
                         value={cpm} 
                         setValue={setCpm} 
@@ -296,7 +296,7 @@
                         max={100}
                         />
                         <InputCard 
-                        label="AOV (Avg Order)" 
+                        label="AOV (Average Order Value)" 
                         desc="Average spent per customer"
                         value={aov} 
                         setValue={setAov} 
@@ -306,7 +306,7 @@
                         max={500}
                         />
                         <InputCard 
-                        label="CVR (Conversion)" 
+                        label="CVR (Conversion Rate)" 
                         desc="% of clicks that buy"
                         value={cvr} 
                         setValue={setCvr} 
@@ -339,7 +339,7 @@
                     <div className="flex items-center justify-between mb-8 border-t border-zinc-800 pt-8">
                         <h2 className="text-2xl font-bold text-white flex items-center gap-3">
                         <Lightbulb className="text-indigo-400" size={24} />
-                        Growth Strategy Playbook
+                        ROAS Optimization Playbook
                         </h2>
                         <div className="hidden md:block text-sm text-zinc-500 max-w-sm text-right">
                         Actionable steps to improve each variable.
