@@ -1,0 +1,4 @@
+git pull
+git rm -r .github/workflows
+git commit -m "Remove Actions completely"
+git push
