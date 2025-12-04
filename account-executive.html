@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We're Hiring: Closer / Account Executive | Linear Agency</title>
+    
+    <!-- Fonts: Inter for that clean, modern SaaS look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (Play CDN for standalone usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Config to match the screenshots (Dark Theme & Blurple) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',     // Very dark background
+                            card: '#0f0f0f',     // Slightly lighter for cards
+                            accent: '#5D5CDE',   // The specific "Blurple" from the screenshot
+                            accentHover: '#4b4ac0',
+                            text: '#E5E7EB',     // Light gray text
+                            muted: '#9CA3AF'     // Muted text
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 50%, rgba(93, 92, 222, 0.15) 0%, rgba(5, 5, 5, 0) 50%)',
+                        'card-gradient': 'linear-gradient(180deg, rgba(20,20,20,1) 0%, rgba(15,15,15,1) 100%)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar for a premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5D5CDE; 
+        }
+
+        /* Subtle animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold tracking-tight text-white hover:opacity-80 transition">
+                linear.
+            </a>
+
+            <!-- Desktop Links (Hidden on Mobile) -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#role" class="hover:text-white transition">The Role</a>
+                <a href="#requirements" class="hover:text-white transition">Requirements</a>
+                <a href="#apply" class="px-5 py-2.5 rounded-full border border-white/20 hover:bg-white hover:text-black transition duration-300">
+                    Apply Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Glow Effect -->
+        <div class="absolute inset-0 bg-hero-glow pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-semibold tracking-wide uppercase mb-8 fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+                We are Hiring
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight mb-6 fade-in-up delay-100">
+                Become Our First <br />
+                <span class="text-brand-accent">Closer / AE.</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed fade-in-up delay-200">
+                Work directly with founders Evan Carroll & Ciaran Finn. Close deals for 7, 8 & 9-figure DTC brands. Uncapped commissions.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up delay-300">
+                <a href="#apply" class="group relative px-8 py-4 bg-brand-accent hover:bg-brand-accentHover text-white font-semibold rounded-full transition-all duration-300 flex items-center gap-2 shadow-[0_0_20px_rgba(93,92,222,0.3)] hover:shadow-[0_0_30px_rgba(93,92,222,0.5)]">
+                    Apply For The Role
+                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <a href="#about" class="px-8 py-4 bg-transparent border border-white/10 hover:border-white/30 text-white font-medium rounded-full transition-all duration-300">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- "What We Do" / Stats Section (Reference Screenshot 2 style) -->
+    <section id="about" class="py-20 relative border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-4">
+                    Why This Role is <span class="text-brand-accent">Rare.</span>
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Most sales roles require you to hunt in the dark. At Linear, you leverage our authority.
+                </p>
+            </div>
+
+            <!-- Grid of Cards -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-brand-card border border-white/5 rounded-2xl p-8 hover:border-brand-accent/30 transition duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition">
+                        <i class="fa-solid fa-rocket text-brand-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Founder Leverage</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Our founders have <strong>~60k+ LinkedIn followers</strong>. You aren't cold calling nobodies; you are processing warm, high-intent leads generated by industry leaders.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-brand-card border border-white/5 rounded-2xl p-8 hover:border-brand-accent/30 transition duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition">
+                        <i class="fa-solid fa-crown text-brand-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Iconic Portfolio</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Sell with firepower. We've scaled 250+ brands like <strong>Loop Earplugs, MAËLYS, & Lamborghini</strong>. Trust is already built before you get on the call.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-brand-card border border-white/5 rounded-2xl p-8 hover:border-brand-accent/30 transition duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-brand-accent/10 flex items-center justify-center mb-6 group-hover:bg-brand-accent/20 transition">
+                        <i class="fa-solid fa-chart-line text-brand-accent text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Uncapped Growth</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        You are the <strong>first Account Executive</strong>. There is massive room to grow into a Lead Closer, Sales Manager, or VP of Sales as we scale.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Content Split -->
+    <section id="role" class="py-20 bg-brand-card border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
+            
+            <!-- Left: Description -->
+            <div>
+                <div class="inline-block px-3 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-medium text-gray-300 mb-4">
+                    Full-Time &bull; Remote &bull; Base + Commission
+                </div>
+                <h2 class="text-3xl font-bold text-white mb-6">What You'll Be Doing</h2>
+                <p class="text-gray-400 mb-8">
+                    Leadflow is currently too high for our founders' capacity. You will act as the right hand to Evan & Ciaran, managing the pipeline from qualification to close.
+                </p>
+
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                        <span class="text-gray-300">Taking qualified sales calls (referrals, inbound, paid ads).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                        <span class="text-gray-300">Closing deals ranging from <strong>$4K to $25K+/month</strong>.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                        <span class="text-gray-300">Managing pipeline aggressively—reviving stale leads and hunting.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                        <span class="text-gray-300">Issuing contracts and handling onboarding.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                        <span class="text-gray-300">Working in EST or Western European timezones.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right: Requirements -->
+            <div id="requirements" class="bg-brand-dark p-8 rounded-2xl border border-white/10">
+                <h3 class="text-2xl font-bold text-white mb-6">Who We Are Looking For</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold">Hungry & Action-Oriented</h4>
+                            <p class="text-sm text-gray-400 mt-1">You don't wait to be told what to do. No-show? You use that time to find more deals.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold">eCom Fluent</h4>
+                            <p class="text-sm text-gray-400 mt-1">You understand ROAS, CAC, Meta Ads, and scale problems. You speak the language of founders.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold">High-Ticket Experience</h4>
+                            <p class="text-sm text-gray-400 mt-1">You've sold marketing services to agencies or SaaS companies before. You aren't scared of big numbers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Application Form Section -->
+    <section id="apply" class="py-24 bg-gradient-to-b from-brand-dark to-brand-card border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white mb-4">Ready to Close?</h2>
+                <p class="text-gray-400">
+                    If you think you're the right fit, fill out the application below. <br>
+                    <span class="text-brand-accent">Note:</span> You will be asked for a 1-3 minute Loom video.
+                </p>
+            </div>
+
+            <!-- Application Form Container -->
+            <div class="bg-brand-dark border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl">
+                <form onsubmit="event.preventDefault(); alert('Application Submitted (Demo Only)!');" class="space-y-6">
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">First Name</label>
+                            <input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="Jane" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Last Name</label>
+                            <input type="text" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="Doe" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                        <input type="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="jane@example.com" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">LinkedIn Profile URL</label>
+                        <input type="url" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="https://linkedin.com/in/..." required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">
+                            Loom Video URL (1-3 mins) <span class="text-red-400">*</span>
+                        </label>
+                        <p class="text-xs text-gray-500 mb-2">Tell us why you're the best fit for Linear Agency.</p>
+                        <input type="url" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="https://loom.com/share/..." required>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Why should we hire you?</label>
+                        <textarea rows="4" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="Sell yourself..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-brand-accent hover:bg-brand-accentHover text-white font-bold rounded-lg transition-all duration-300 shadow-lg shadow-brand-accent/25">
+                        Submit Application
+                    </button>
+                    
+                    <p class="text-center text-xs text-gray-500 mt-4">
+                        By applying, you agree to our privacy policy.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-2xl font-bold text-white">linear.</div>
+            <div class="text-sm text-gray-500">
+                &copy; 2025 Linear Agency. All rights reserved.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-youtube text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll implementation for browsers that don't support scroll-behavior: smooth in CSS
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
