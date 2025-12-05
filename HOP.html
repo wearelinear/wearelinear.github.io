@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head of Performance Roadmap | Linear</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#0f0f0f',
+                            accent: '#5D5CDE',
+                            accentHover: '#4b4ac0',
+                            text: '#E5E7EB',
+                            muted: '#9CA3AF',
+                            success: '#10B981'
+                        }
+                    },
+                    backgroundImage: {
+                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(93, 92, 222, 0.15) 0%, rgba(5, 5, 5, 0) 60%)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Timeline connector line */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, #5D5CDE 0%, #333 100%);
+            z-index: 0;
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                margin-left: -1px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased">
+
+    <!-- Header / Nav placeholder -->
+    <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <span class="text-2xl font-bold text-white tracking-tight">linear.</span>
+            <div class="text-sm font-medium text-brand-muted">Internal Roadmap: Luc</div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
+        <div class="absolute inset-0 bg-hero-glow pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-bold tracking-wide uppercase mb-6">
+                6-Month Evolution
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                Roadmap to <br/>
+                <span class="text-brand-accent">Head of Performance.</span>
+            </h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Luc, this is your path from Pod Leader to shaping performance at scale. A phased evolution focused on hiring your replacement, building systems with Bruno, and driving agency-wide outcomes.
+            </p>
+        </div>
+    </header>
+
+    <!-- Timeline Content -->
+    <section class="relative pb-32">
+        <div class="max-w-5xl mx-auto px-6 timeline-line relative">
+            
+            <!-- Phase 1 -->
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 mb-24 items-center">
+                <!-- Timeline Dot (Mobile: Left, Desktop: Center) -->
+                <div class="absolute left-[11px] md:left-1/2 md:-ml-3 w-6 h-6 rounded-full bg-brand-accent border-4 border-brand-dark shadow-[0_0_15px_rgba(93,92,222,0.6)]"></div>
+                
+                <!-- Left Side: Content -->
+                <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+                    <h2 class="text-2xl font-bold text-white mb-2">Phase 1: The Handoff</h2>
+                    <div class="text-brand-accent font-mono text-sm mb-4">Months 0 - 2</div>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Transition out of the Pod Leader seat while hiring and onboarding your replacement. Ensure zero drop in client experience.
+                    </p>
+                    <div class="inline-block bg-white/5 border border-white/10 rounded-lg px-4 py-2">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider block mb-1">Compensation</span>
+                        <span class="text-xl font-bold text-white">$8,000</span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Details Card -->
+                <div class="pl-12 md:pl-12">
+                    <div class="bg-brand-card border border-white/5 rounded-2xl p-6 hover:border-brand-accent/30 transition duration-300">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-brand-muted"></i> Core Responsibilities
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-6">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Lead hiring process for new Pod Leader.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Create & execute training program (shadowing, docs).
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Maintain operations for zero client drop-off.
+                            </li>
+                        </ul>
+                        
+                        <div class="pt-4 border-t border-white/5">
+                            <h4 class="text-xs font-bold text-brand-success uppercase tracking-wider mb-2">Success Indicators</h4>
+                            <p class="text-xs text-gray-500">New Pod Leader reaches operational autonomy & clients trust them.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 mb-24 items-center">
+                <!-- Timeline Dot -->
+                <div class="absolute left-[11px] md:left-1/2 md:-ml-3 w-6 h-6 rounded-full bg-brand-card border-2 border-brand-accent shadow-[0_0_15px_rgba(93,92,222,0.3)]"></div>
+                
+                <!-- Left Side: Details Card (Swapped for Zig-Zag effect on Desktop) -->
+                <div class="pl-12 md:pl-0 md:pr-12 md:order-1">
+                    <div class="bg-brand-card border border-white/5 rounded-2xl p-6 hover:border-brand-accent/30 transition duration-300">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-brand-muted"></i> Core Responsibilities
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-6">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Co-build Head of Performance role with Bruno.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Join task forces for high-priority/struggling accounts.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Build internal escalation frameworks.
+                            </li>
+                        </ul>
+                        
+                        <div class="pt-4 border-t border-white/5">
+                            <h4 class="text-xs font-bold text-brand-success uppercase tracking-wider mb-2">Success Indicators</h4>
+                            <p class="text-xs text-gray-500">Increased clarity in problem solving; Bruno & Luc operating as a performance control pair.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Content -->
+                <div class="pl-12 md:pl-12 md:order-2">
+                    <h2 class="text-2xl font-bold text-white mb-2">Phase 2: Foundation</h2>
+                    <div class="text-brand-accent font-mono text-sm mb-4">Months 2 - 4</div>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Shift from execution to influence. Work directly beside Bruno to build the HoP function while stabilizing critical accounts.
+                    </p>
+                    <div class="inline-block bg-white/5 border border-white/10 rounded-lg px-4 py-2">
+                        <span class="text-xs text-gray-500 uppercase tracking-wider block mb-1">Compensation</span>
+                        <span class="text-xl font-bold text-white">$9,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="relative z-10 grid md:grid-cols-2 gap-8 mb-12 items-center">
+                <!-- Timeline Dot -->
+                <div class="absolute left-[11px] md:left-1/2 md:-ml-3 w-6 h-6 rounded-full bg-brand-card border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.3)]"></div>
+                
+                <!-- Left Side: Content -->
+                <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+                    <h2 class="text-2xl font-bold text-white mb-2">Phase 3: Full Ownership</h2>
+                    <div class="text-brand-accent font-mono text-sm mb-4">Months 4 - 6</div>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Proactive instead of reactive. Create systems, dashboards, and testing frameworks that improve results agency-wide.
+                    </p>
+                    <div class="inline-block bg-brand-accent/10 border border-brand-accent/30 rounded-lg px-4 py-2">
+                        <span class="text-xs text-brand-accent uppercase tracking-wider block mb-1">Compensation</span>
+                        <span class="text-xl font-bold text-white">$10,000 <span class="text-sm font-normal text-gray-400">+ Bonus</span></span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Details Card -->
+                <div class="pl-12 md:pl-12">
+                    <div class="bg-brand-card border border-white/5 rounded-2xl p-6 hover:border-brand-accent/30 transition duration-300">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-brand-muted"></i> Core Responsibilities
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300 mb-6">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Build dashboards to monitor all accounts.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Drive creative testing innovation & playbooks.
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check text-brand-accent mt-1"></i>
+                                Optimize client commission models.
+                            </li>
+                        </ul>
+                        
+                        <div class="pt-4 border-t border-white/5">
+                            <h4 class="text-xs font-bold text-brand-success uppercase tracking-wider mb-2">Success Indicators</h4>
+                            <p class="text-xs text-gray-500">Performance wins replicated across pods; Agency recognized for excellence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Summary / Bonus Section -->
+    <section class="py-20 bg-brand-card border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Bonus Structure -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Performance Bonus Structure</h3>
+                    <p class="text-gray-400 text-sm mb-6">To be built collaboratively with Bruno, based around:</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 bg-brand-dark p-4 rounded-lg border border-white/5">
+                            <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent"><i class="fa-solid fa-smile"></i></div>
+                            <span class="text-gray-300 font-medium">Client Satisfaction</span>
+                        </li>
+                        <li class="flex items-center gap-4 bg-brand-dark p-4 rounded-lg border border-white/5">
+                            <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent"><i class="fa-solid fa-bullseye"></i></div>
+                            <span class="text-gray-300 font-medium">Performance Targets Hit</span>
+                        </li>
+                        <li class="flex items-center gap-4 bg-brand-dark p-4 rounded-lg border border-white/5">
+                            <div class="w-8 h-8 rounded-full bg-brand-accent/20 flex items-center justify-center text-brand-accent"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <span class="text-gray-300 font-medium">Retention & Expansion</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Summary Table -->
+                <div class="bg-brand-dark rounded-xl border border-white/10 p-6">
+                    <h3 class="text-xl font-bold text-white mb-6">At a Glance</h3>
+                    <div class="space-y-4">
+                        <!-- Row 1 -->
+                        <div class="flex justify-between items-center pb-4 border-b border-white/5">
+                            <div>
+                                <div class="text-brand-accent text-xs font-bold uppercase">Phase 1</div>
+                                <div class="text-gray-400 text-sm">Handoff & Hire</div>
+                            </div>
+                            <div class="text-white font-mono font-bold">$8,000</div>
+                        </div>
+                        <!-- Row 2 -->
+                        <div class="flex justify-between items-center pb-4 border-b border-white/5">
+                            <div>
+                                <div class="text-brand-accent text-xs font-bold uppercase">Phase 2</div>
+                                <div class="text-gray-400 text-sm">Foundation w/ Bruno</div>
+                            </div>
+                            <div class="text-white font-mono font-bold">$9,000</div>
+                        </div>
+                        <!-- Row 3 -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-brand-accent text-xs font-bold uppercase">Phase 3</div>
+                                <div class="text-gray-400 text-sm">Full Ownership</div>
+                            </div>
+                            <div class="text-white font-mono font-bold">$10k <span class="text-xs font-normal text-gray-500">+ Bonus</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 text-center border-t border-white/5">
+        <div class="text-gray-600 text-sm">&copy; 2025 Linear Agency. Internal Use Only.</div>
+    </footer>
+
+</body>
+</html>
