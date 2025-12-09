@@ -16,7 +16,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-   
     <!-- Config -->
     <script>
         tailwind.config = {
@@ -40,7 +39,8 @@
                         'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(93, 92, 222, 0.15) 0%, rgba(5, 5, 5, 0) 60%)',
                     },
                     animation: {
-                        'scroll-loop': 'scrollLoop 40s linear infinite',
+                        'scroll-loop': 'scrollLoop 60s linear infinite',
+                        'logo-loop': 'scrollLoop 40s linear infinite',
                     },
                     keyframes: {
                         scrollLoop: {
@@ -53,78 +53,66 @@
         }
     </script>
     <style>
-        /* Hide scrollbar for clean look */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5D5CDE; }
+
+        /* Video Scroller Styles */
+        .video-scroll-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        /* Custom styles for video scroller */
-        .scroll-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            padding: 40px 0;
-            background: #050505;
-        }
-        .scroll-content {
-            display: flex;
-            gap: 20px;
-            width: max-content;
-            animation: scrollLoop 40s linear infinite;
-        }
-        /* Pauses animation on hover */
-        .scroll-wrapper:hover .scroll-content {
-            animation-play-state: paused;
-        }
-        .scroll-item {
-            flex-shrink: 0;
-            width: 200px; /* Adjust width as needed for aspect ratio */
-            height: 355px; /* Adjust height based on 9x16 ratio approx */
+        
+        .video-card {
+            width: 200px;
+            height: 355px; /* 9:16 Ratio */
             border-radius: 12px;
             overflow: hidden;
-            position: relative;
             border: 1px solid rgba(255,255,255,0.1);
+            background: #000;
+            flex-shrink: 0;
+            position: relative;
         }
-        .scroll-item video {
+        
+        .video-card video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        /* Gradient overlays for smooth fade edges */
-        .scroll-gradient-left, .scroll-gradient-right {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 150px;
-            z-index: 2;
-            pointer-events: none;
+
+        /* Logo Scroller Styles */
+        .logo-scroll-container {
+            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
         }
-        .scroll-gradient-left {
-            left: 0;
-            background: linear-gradient(to right, #050505, transparent);
+        .logo-item {
+            height: 40px;
+            width: auto;
+            flex-shrink: 0;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+            filter: grayscale(100%);
         }
-        .scroll-gradient-right {
-            right: 0;
-            background: linear-gradient(to left, #050505, transparent);
+        .logo-item:hover {
+            opacity: 1;
+            filter: grayscale(0%);
         }
     </style>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
 
-
     <!-- Nav -->
     <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-           <a href="https://www.wearelinear.com"><img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" alt="Linear Logo" class="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"></a>
-            <div class="text-sm font-medium text-brand-muted">UGC Packages</div>
+            <a href="https://www.wearelinear.com"><img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" alt="Linear Logo" class="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"></a>
+        
         </div>
     </nav>
 
     <!-- Hero -->
-    <header class="relative pt-32 pb-20 overflow-hidden">
+    <header class="relative pt-32 pb-16 overflow-hidden">
         <div class="absolute inset-0 bg-hero-glow pointer-events-none"></div>
         <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-bold tracking-wide uppercase mb-6">
@@ -139,127 +127,36 @@
             </p>
         </div>
     </header>
- <!-- Video Scroller Section -->
-    <div class="scroll-wrapper mb-10">
-        <!-- Gradients for fade effect -->
-        <div class="scroll-gradient-left"></div>
-        <div class="scroll-gradient-right"></div>
-        
-        <!-- Scrolling Content -->
-        <div class="scroll-content">
-            <!-- First Set of Videos -->
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f875976f303d75a4f5de_giftovideo_20240522_062754-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            
-            <!-- Duplicated Set for Seamless Loop -->
-             <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f875976f303d75a4f5de_giftovideo_20240522_062754-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
-            </div>
-            <div class="scroll-item">
-                <video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4">
-                    <source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.webm" type="video/webm">
-                </video>
+
+    <!-- Video Carousel (Infinite Scroll) -->
+    <section class="py-10 relative overflow-hidden">
+        <div class="video-scroll-container w-full">
+            <div class="flex gap-6 w-max animate-scroll-loop hover:[animation-play-state:paused]">
+                <!-- ORIGINAL SET -->
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f875976f303d75a4f5de_giftovideo_20240522_062754-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+
+                <!-- DUPLICATE SET FOR LOOP -->
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f875976f303d75a4f5de_giftovideo_20240522_062754-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f5_giftovideo_20240522_062754-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
+                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
             </div>
         </div>
-    </div>
+    </section>
+
     <!-- Creator Tiers -->
     <section class="py-16 border-y border-white/5 bg-brand-card">
         <div class="max-w-6xl mx-auto px-6">
@@ -383,7 +280,7 @@
 
                 <!-- Pack 4 -->
                 <div class="bg-brand-card border border-white/5 rounded-xl p-6 hover:border-brand-accent/30 transition">
-                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Expansion</div>
+                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Dominance</div>
                     <div class="text-2xl font-bold text-white mb-4">27 Angles</div>
                     <div class="space-y-2 text-sm text-gray-400 mb-6 border-b border-white/5 pb-6">
                         <div class="flex justify-between"><span>3 Pro Creators</span> <span>(12 angles)</span></div>
@@ -436,14 +333,14 @@
 
                     <!-- Statics Input -->
                     <div>
-                        <label class="block text-sm font-bold text-white mb-2">Extra Statics</label>
+                        <label class="block text-sm font-bold text-white mb-2">Additional Statics</label>
                         <div class="flex items-center gap-3">
                             <button onclick="updateCount('static', -1)" class="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                             <!-- Start value 0 (which means 20 free). Display logic handles the number shown. -->
                             <input type="text" id="static-display" value="20" readonly class="w-16 h-10 bg-transparent text-center text-white font-mono text-lg focus:outline-none">
                             <button onclick="updateCount('static', 1)" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
                         </div>
-                        <div class="text-xs text-gray-500 mt-2">Batches of 5 (20 included free)</div>
+                        <div class="text-xs text-gray-500 mt-2">20 Statics included free</div>
                     </div>
                 </div>
 
@@ -510,12 +407,45 @@
         </div>
     </section>
 
+    <!-- Trust / Logos Section -->
+    <section class="py-12 border-t border-white/5 overflow-hidden">
+        <div class="text-center mb-8">
+            <p class="text-white text-lg font-semibold">200+ ambitious brands trust Linear</p>
+        </div>
+        
+        <div class="logo-scroll-container w-full max-w-6xl mx-auto">
+            <div class="flex gap-16 w-max animate-logo-loop items-center">
+                <!-- ORIGINAL LOGOS -->
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item h-12">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item h-8">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item h-8 invert brightness-0">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item h-12">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item h-10">
+
+                <!-- DUPLICATE SET -->
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item h-12">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item h-8">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item h-8 invert brightness-0">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item h-12">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item h-10">
+            </div>
+        </div>
+    </section>
+
     <!-- Final CTA Section -->
     <section class="py-24 bg-gradient-to-b from-brand-dark to-brand-card border-t border-white/5">
         <div class="max-w-4xl mx-auto px-6 text-center">
             <h2 class="text-4xl font-bold text-white mb-6 leading-tight">Ready to scale your brand with <br><span class="text-brand-accent">high-performing UGC Creatives?</span></h2>
             <div class="flex justify-center mt-8">
-                <a href="https://www.wearelinear.com/booking-page" class="group relative px-10 py-5 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold rounded-full transition-all duration-300 flex items-center gap-3 shadow-[0_0_20px_rgba(93,92,222,0.4)] hover:shadow-[0_0_40px_rgba(93,92,222,0.6)]">
+                <a href="#" class="group relative px-10 py-5 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold rounded-full transition-all duration-300 flex items-center gap-3 shadow-[0_0_20px_rgba(93,92,222,0.4)] hover:shadow-[0_0_40px_rgba(93,92,222,0.6)]">
                     Book a strategy call to get started
                     <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
                 </a>
