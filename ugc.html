@@ -82,18 +82,22 @@
             object-fit: cover;
         }
 
-        /* Logo Scroller Styles */
+       /* Logo Scroller Styles */
         .logo-scroll-container {
             mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
         }
         .logo-item {
-            height: 40px;
+            /* Reduced height for smaller logos */
+            height: 30px; 
             width: auto;
             flex-shrink: 0;
             opacity: 0.6;
             transition: opacity 0.3s;
             filter: grayscale(100%);
+            /* Ensure max-width to prevent extremely wide logos from dominating */
+            max-width: 120px; 
+            object-fit: contain;
         }
         .logo-item:hover {
             opacity: 1;
@@ -414,27 +418,27 @@
         
         <div class="logo-scroll-container w-full max-w-6xl mx-auto">
             <div class="flex gap-16 w-max animate-logo-loop items-center">
-                <!-- ORIGINAL LOGOS -->
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item h-12">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item h-8">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item h-8 invert brightness-0">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item h-12">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item h-10">
+              <!-- ORIGINAL LOGOS -->
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item" style="height: 45px;">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item" style="height: 45px;>
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item invert brightness-0" style="height: 45px;>
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item">
 
                 <!-- DUPLICATE SET -->
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item h-12">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item h-8">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item h-8 invert brightness-0">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item h-12">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item h-10">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item h-10">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item" style="height: 45px;">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item invert brightness-0">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item">
+                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item">
             </div>
         </div>
     </section>
@@ -453,7 +457,7 @@
     </section>
 
     <footer class="bg-black py-12 text-center border-t border-white/5 mt-12">
-        <div class="text-gray-600 text-sm">&copy; 2025 Linear Agency.</div>
+        <div class="text-gray-600 text-sm">&copy; © 2025 Linear. All rights reserved.</div>
     </footer>
 
     <!-- Logic Script -->
