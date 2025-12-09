@@ -16,6 +16,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+   
     <!-- Config -->
     <script>
         tailwind.config = {
@@ -37,13 +38,82 @@
                     },
                     backgroundImage: {
                         'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(93, 92, 222, 0.15) 0%, rgba(5, 5, 5, 0) 60%)',
+                    },
+                    animation: {
+                        'scroll-loop': 'scrollLoop 40s linear infinite',
+                    },
+                    keyframes: {
+                        scrollLoop: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* Hide scrollbar for clean look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Custom styles for video scroller */
+        .scroll-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 40px 0;
+            background: #050505;
+        }
+        .scroll-content {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            animation: scrollLoop 40s linear infinite;
+        }
+        /* Pauses animation on hover */
+        .scroll-wrapper:hover .scroll-content {
+            animation-play-state: paused;
+        }
+        .scroll-item {
+            flex-shrink: 0;
+            width: 200px; /* Adjust width as needed for aspect ratio */
+            height: 355px; /* Adjust height based on 9x16 ratio approx */
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scroll-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Gradient overlays for smooth fade edges */
+        .scroll-gradient-left, .scroll-gradient-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .scroll-gradient-left {
+            left: 0;
+            background: linear-gradient(to right, #050505, transparent);
+        }
+        .scroll-gradient-right {
+            right: 0;
+            background: linear-gradient(to left, #050505, transparent);
+        }
+    </style>
 </head>
 <body class="bg-brand-dark text-brand-text font-sans antialiased">
+
 
     <!-- Nav -->
     <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
