@@ -235,7 +235,6 @@
                                 <input type="number" id="rev-premium" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
                                 <button onclick="updateReverseCount('premium', 4)" class="w-8 h-8 rounded bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
-                            <!-- REMOVED: Steps of 4 -->
                         </div>
 
                         <!-- Reverse Regular -->
@@ -246,7 +245,6 @@
                                 <input type="number" id="rev-regular" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
                                 <button onclick="updateReverseCount('regular', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
-                            <!-- REMOVED: Steps of 5 -->
                         </div>
 
                         <!-- Reverse Static -->
@@ -257,7 +255,6 @@
                                 <input type="number" id="rev-static" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
                                 <button onclick="updateReverseCount('static', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
-                            <!-- REMOVED: Steps of 5 -->
                         </div>
                     </div>
                 </div>
@@ -410,6 +407,8 @@
 
             // Pricing
             document.getElementById('price-floor').innerText = formatMoney(requiredNetRevenue);
+            
+            document.getElementById('discount-badge').innerText = (discountRate * 100) + '%';
             
             document.getElementById('standard-price').innerText = formatMoney(standardPrice);
             document.getElementById('discount-percent').innerText = (discountRate * 100) + '%';
