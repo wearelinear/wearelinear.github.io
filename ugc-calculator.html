@@ -69,7 +69,7 @@
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('premium', -4)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                         <input type="number" id="premium-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
-                        <button onclick="updateCount('premium', 4)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
+                        <button onclick="updateCount('premium', 4)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition shadow-lg shadow-white/5"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     <div class="mt-2 text-right text-xs text-gray-500">Increments of 4</div>
                 </div>
@@ -83,7 +83,7 @@
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('regular', -5)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                         <input type="number" id="regular-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
-                        <button onclick="updateCount('regular', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
+                        <button onclick="updateCount('regular', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     <div class="mt-2 text-right text-xs text-gray-500">Increments of 5</div>
                 </div>
@@ -97,7 +97,7 @@
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('static', -5)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                         <input type="number" id="static-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
-                        <button onclick="updateCount('static', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
+                        <button onclick="updateCount('static', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
                     </div>
                     <div class="mt-2 text-right text-xs text-gray-500">Increments of 5</div>
                 </div>
@@ -113,6 +113,10 @@
                         <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
                             <span class="text-gray-400">Total Angles:</span>
                             <span class="text-white font-mono font-bold text-lg" id="summary-angles">0</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
+                            <span class="text-gray-400"># of Creators:</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-creators">0</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-400">Total Statics:</span>
@@ -233,7 +237,7 @@
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick="updateReverseCount('premium', -4)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
                                 <input type="number" id="rev-premium" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
-                                <button onclick="updateReverseCount('premium', 4)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus text-xs"></i></button>
+                                <button onclick="updateReverseCount('premium', 4)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
                         </div>
 
@@ -243,7 +247,7 @@
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick="updateReverseCount('regular', -5)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
                                 <input type="number" id="rev-regular" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
-                                <button onclick="updateReverseCount('regular', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus text-xs"></i></button>
+                                <button onclick="updateReverseCount('regular', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
                         </div>
 
@@ -253,7 +257,7 @@
                             <div class="flex items-center justify-center gap-2">
                                 <button onclick="updateReverseCount('static', -5)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
                                 <input type="number" id="rev-static" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
-                                <button onclick="updateReverseCount('static', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus text-xs"></i></button>
+                                <button onclick="updateReverseCount('static', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
                             </div>
                         </div>
                     </div>
@@ -267,6 +271,10 @@
                         <div class="flex justify-between text-sm text-gray-400 mb-1">
                             <span>Total Angles:</span>
                             <span class="text-white font-mono font-bold" id="rev-total-angles">0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mb-1">
+                            <span># of Creators:</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-creators">0</span>
                         </div>
                         <div class="flex justify-between text-sm text-gray-400">
                             <span>Total Statics:</span>
@@ -324,14 +332,17 @@
             if (newCount < 0) return;
             counts[type] = newCount;
             
-            // Input shows Total Count directly
+            // Input shows Total Count directly (not batches anymore, but total items)
             document.getElementById(`${type}-count`).value = counts[type];
             calculate();
         }
 
         function calculate() {
-            // 1. Calculate Totals
+            // 1. Calculate Totals - counts[type] now holds total angles/statics directly
             const totalAngles = counts.premium + counts.regular;
+            // 1 creator per 4 Premium Angles, 1 creator per 5 Regular Angles
+            // Since inputs step by 4 and 5, division is clean
+            const totalCreators = (counts.premium / 4) + (counts.regular / 5); 
 
             // 2. Calculate COGS (Cost of Goods Sold)
             const cogsPremium = counts.premium * COST_PREMIUM_ANGLE;
@@ -340,47 +351,36 @@
             
             const totalCOGS = cogsPremium + cogsRegular + cogsStatic;
 
-            // 3. Calculate Minimum Sell Price to hit 80% Margin (Net Revenue needed)
-            // Net Revenue - COGS = Margin * Net Revenue  =>  Net Revenue * (1 - Margin) = COGS
-            const requiredNetRevenue = totalCOGS > 0 ? (totalCOGS / (1 - TARGET_MARGIN)) : 0;
+            // 3. Calculate Minimum Sell Price to hit 80% Margin
+            // Price - COGS = Margin * Price  =>  Price * (1 - Margin) = COGS  =>  Price = COGS / (1 - Margin)
+            const minSellPrice = totalCOGS > 0 ? (totalCOGS / (1 - TARGET_MARGIN)) : 0;
 
-            // 4. Calculate Standard List Price (Pre-Discount)
-            // We need a Standard Price X such that: X * (1 - discount_rate) >= requiredNetRevenue
-            // We solve this by finding the lowest X that satisfies the discount tier thresholds.
-            
-            // Base case: No discount
-            let standardPrice = requiredNetRevenue;
+            // 4. Determine Volume Discount Tier based on the projected list price
+            let recommendedListPrice = minSellPrice;
             let discountRate = 0;
 
-            // Iteratively bump up the price to account for discounts at various levels
-            
-            // Check if we qualify for 25% discount (>20k list)
-            // Price needed if 25% off:
-            let priceFor25 = requiredNetRevenue / 0.75;
-            if (priceFor25 > 20000) {
-                standardPrice = priceFor25;
+            // Check thresholds on the List Price
+            let priceAt25 = minSellPrice / 0.75;
+            if (priceAt25 > 20000) {
+                recommendedListPrice = priceAt25;
                 discountRate = 0.25;
             } else {
-                // Check 20% discount (>15k list)
-                let priceFor20 = requiredNetRevenue / 0.80;
-                if (priceFor20 > 15000) {
-                    standardPrice = priceFor20;
+                let priceAt20 = minSellPrice / 0.80;
+                if (priceAt20 > 15000) {
+                    recommendedListPrice = priceAt20;
                     discountRate = 0.20;
                 } else {
-                    // Check 15% discount (>10k list)
-                    let priceFor15 = requiredNetRevenue / 0.85;
-                    if (priceFor15 > 10000) {
-                        standardPrice = priceFor15;
+                    let priceAt15 = minSellPrice / 0.85;
+                    if (priceAt15 > 10000) {
+                        recommendedListPrice = priceAt15;
                         discountRate = 0.15;
                     } else {
-                        // Check 10% discount (>7k list)
-                        let priceFor10 = requiredNetRevenue / 0.90;
-                        if (priceFor10 > 7000) {
-                            standardPrice = priceFor10;
+                        let priceAt10 = minSellPrice / 0.90;
+                        if (priceAt10 > 7000) {
+                            recommendedListPrice = priceAt10;
                             discountRate = 0.10;
                         } else {
-                            // No discount
-                            standardPrice = requiredNetRevenue;
+                            recommendedListPrice = minSellPrice;
                             discountRate = 0;
                         }
                     }
@@ -388,35 +388,30 @@
             }
 
             // 5. Final Calculations
-            const discountVal = standardPrice * discountRate;
-            const finalPrice = standardPrice - discountVal; // This should be >= requiredNetRevenue
+            const discountVal = recommendedListPrice * discountRate;
+            const finalPrice = recommendedListPrice - discountVal; 
             const grossProfit = finalPrice - totalCOGS;
             const actualMargin = finalPrice > 0 ? (grossProfit / finalPrice) * 100 : 0;
 
             // 6. Update UI
-            
-            // Summary Box
             document.getElementById('summary-angles').innerText = totalAngles;
+            document.getElementById('summary-creators').innerText = totalCreators;
             document.getElementById('summary-statics').innerText = counts.static;
 
-            // COGS
             document.getElementById('cogs-premium').innerText = formatMoney(cogsPremium);
             document.getElementById('cogs-regular').innerText = formatMoney(cogsRegular);
             document.getElementById('cogs-static').innerText = formatMoney(cogsStatic);
             document.getElementById('cogs-total').innerText = formatMoney(totalCOGS);
 
-            // Pricing
-            document.getElementById('price-floor').innerText = formatMoney(requiredNetRevenue);
-            
+            document.getElementById('price-floor').innerText = formatMoney(minSellPrice);
             document.getElementById('discount-badge').innerText = (discountRate * 100) + '%';
             
-            document.getElementById('standard-price').innerText = formatMoney(standardPrice);
+            document.getElementById('standard-price').innerText = formatMoney(recommendedListPrice);
             document.getElementById('discount-percent').innerText = (discountRate * 100) + '%';
             document.getElementById('discount-amount').innerText = '-' + formatMoney(discountVal);
             
             document.getElementById('final-price').innerText = formatMoney(finalPrice);
 
-            // Stats
             document.getElementById('net-revenue').innerText = formatMoney(finalPrice);
             document.getElementById('gross-profit').innerText = formatMoney(grossProfit);
             
@@ -456,6 +451,11 @@
             const rAngles = revCounts.regular;
             const statics = revCounts.static;
 
+            // Calculate Creators: pAngles/4 + rAngles/5
+            const pCreators = pAngles / 4;
+            const rCreators = rAngles / 5;
+            const totalCreators = pCreators + rCreators;
+
             const cogs = (pAngles * COST_PREMIUM_ANGLE) + (rAngles * COST_REGULAR_ANGLE) + (statics * COST_STATIC);
             const profit = price - cogs;
             const margin = price > 0 ? (profit / price) * 100 : 0;
@@ -465,6 +465,7 @@
             // UI Update
             document.getElementById('rev-cogs').innerText = formatMoney(cogs);
             document.getElementById('rev-total-angles').innerText = totalAngles;
+            document.getElementById('rev-total-creators').innerText = totalCreators;
             document.getElementById('rev-total-statics').innerText = statics;
             
             const profitEl = document.getElementById('rev-profit');
