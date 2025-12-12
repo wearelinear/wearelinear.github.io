@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UGC Packages & Pricing | Linear</title>
+    <title>UGC Pricing Calculator | Linear</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,537 +32,483 @@
                             accentHover: '#4b4ac0',
                             text: '#E5E7EB',
                             muted: '#9CA3AF',
-                            success: '#10B981'
-                        }
-                    },
-                    backgroundImage: {
-                        'hero-glow': 'radial-gradient(circle at 50% 0%, rgba(93, 92, 222, 0.15) 0%, rgba(5, 5, 5, 0) 60%)',
-                    },
-                    animation: {
-                        'scroll-loop': 'scrollLoop 60s linear infinite',
-                        'logo-loop': 'scrollLoop 40s linear infinite',
-                    },
-                    keyframes: {
-                        scrollLoop: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
+                            success: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444'
                         }
                     }
                 }
             }
         }
     </script>
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #5D5CDE; }
-
-        /* Video Scroller Styles */
-        .video-scroll-container {
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-        
-        .video-card {
-            width: 200px;
-            height: 355px; /* 9:16 Ratio */
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: #000;
-            flex-shrink: 0;
-            position: relative;
-        }
-        
-        .video-card video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Logo Scroller Styles */
-        .logo-scroll-container {
-            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-        }
-        .logo-item {
-            /* Reduced height for smaller logos */
-            height: 30px; 
-            width: auto;
-            flex-shrink: 0;
-            opacity: 0.6;
-            transition: opacity 0.3s;
-            filter: grayscale(100%);
-            /* Ensure max-width to prevent extremely wide logos from dominating */
-            max-width: 120px; 
-            object-fit: contain;
-        }
-        .logo-item:hover {
-            opacity: 1;
-            filter: grayscale(0%);
-        }
-    </style>
 </head>
-<body class="bg-brand-dark text-brand-text font-sans antialiased">
+<body class="bg-brand-dark text-brand-text font-sans antialiased min-h-screen flex items-center justify-center p-6">
 
-    <!-- Nav -->
-    <nav class="fixed w-full z-50 bg-brand-dark/80 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="https://www.wearelinear.com"><img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68011526d9ac9984323d0b50_Primary%20Word%20Mark%202%404x-p-500.png" alt="Linear Logo" class="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"></a>
-            <!-- Removed 'UGC Packages' text as requested -->
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <header class="relative pt-32 pb-16 overflow-hidden">
-        <div class="absolute inset-0 bg-hero-glow pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-bold tracking-wide uppercase mb-6">
-                Creative Production
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
-                High-Performance <br/>
-                <span class="text-brand-accent">UGC Packages.</span>
-            </h1>
-            <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                Scale your eCommerce brand with high-performing UGC. We source vetted creators to produce authentic, conversion-focused content that drives results.
-            </p>
-        </div>
-    </header>
-
-    <!-- Video Carousel (Infinite Scroll) -->
-    <section class="py-10 relative overflow-hidden">
-        <div class="video-scroll-container w-full">
-            <div class="flex gap-6 w-max animate-scroll-loop hover:[animation-play-state:paused]">
-                <!-- ORIGINAL SET (Video Removed as requested) -->
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <!-- REMOVED GIFT VIDEO HERE -->
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-
-                <!-- DUPLICATE SET FOR LOOP (Video Removed as requested) -->
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a651bf315f90126af05_YGU_DSQ02_NUGC_A_Amber_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67497a922c1fc7a5bd56502c_YGU_LBW01_UGC_A_Hannah%20Hough_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <!-- REMOVED GIFT VIDEO HERE -->
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6645f33823c1e02345d1a2aa%2F6679f897ca6a56722f4e68d4_giftovideo_20240522_062810-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974f9_giftovideo_20240522_062810-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe5f2eb0b13ba75e12fc_Maximus%203%20Seconds-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F67b9fe6d762dd37df221983a_10%20-%20JazzUpCo%20%282%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F68121759463bc5d8e10cc6e3_LIN%20HON02%20A%209x16-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404%2F6749739ba8ba172ada928d94_YGU_GOA_R1_004_A_OG_9x16_%281%29%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-                <div class="video-card"><video autoplay loop muted playsinline poster="https://cdn.prod.website-files.com/67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-poster-00001.jpg"><source src="https://cdn.prod.website-files.com/67497364e766496f397b9424_YGU_WIE09_Variation%20B_Live%20longer%20dog%20life_9x16%20%28online-video-cuttercom%29-transcode.mp4" type="video/mp4"></video></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Creator Tiers -->
-    <section class="py-16 border-y border-white/5 bg-brand-card">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-12">
-                
-                <!-- PRO Creator -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
-                    <div class="relative bg-brand-dark border border-white/10 rounded-2xl p-8 h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-white">PRO Creator</h3>
-                                <p class="text-brand-accent font-medium mt-1">$3,000 <span class="text-gray-500 text-sm font-normal">/ creator</span></p>
-                            </div>
-                            <div class="px-3 py-1 bg-brand-accent/20 text-brand-accent text-xs font-bold rounded-full uppercase">Top Tier</div>
-                        </div>
-                        
-                        <div class="space-y-4 text-sm text-gray-400 mb-8">
-                            <p>Bigger creators with proven charisma and camera presence. They are used to working with major brands and deliver polished, high-performance content.</p>
-                            <p><strong class="text-white">Locations:</strong> US, UK, Australia, etc.</p>
-                        </div>
-
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center gap-3 text-sm text-gray-300">
-                                <i class="fa-solid fa-video text-brand-accent"></i> 4 Unique Ad Angles
-                            </li>
-                            <li class="flex items-center gap-3 text-sm text-gray-300">
-                                <i class="fa-solid fa-star text-brand-accent"></i> Higher Charisma & Experience
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- CORE Creator -->
-                <div class="relative group">
-                    <div class="relative bg-brand-dark border border-white/10 rounded-2xl p-8 h-full">
-                        <div class="flex justify-between items-start mb-6">
-                            <div>
-                                <h3 class="text-2xl font-bold text-white">CORE Creator</h3>
-                                <p class="text-white font-medium mt-1">$2,000 <span class="text-gray-500 text-sm font-normal">/ creator</span></p>
-                            </div>
-                            <div class="px-3 py-1 bg-white/10 text-gray-300 text-xs font-bold rounded-full uppercase">High Volume</div>
-                        </div>
-                        
-                        <div class="space-y-4 text-sm text-gray-400 mb-8">
-                            <p>Micro-creators with smaller followings but excellent production quality. Perfect for volume testing when the script is king. High quality lighting and equipment guaranteed.</p>
-                            <p><strong class="text-white">Locations:</strong> US Only.</p>
-                        </div>
-
-                        <ul class="space-y-3 mb-8">
-                            <li class="flex items-center gap-3 text-sm text-gray-300">
-                                <i class="fa-solid fa-video text-white"></i> 5 Unique Ad Angles
-                            </li>
-                            <li class="flex items-center gap-3 text-sm text-gray-300">
-                                <i class="fa-solid fa-check text-white"></i> Professional Equipment & Lighting
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-            
-            <div class="mt-8 text-center">
-                <!-- UPDATED: Larger Text Size -->
-                <p class="text-xl md:text-2xl text-green-200 bg-green-500/10 border border-green-500/20 inline-block px-8 py-4 rounded-xl font-semibold">
-                    <i class="fa-solid fa-check-circle mr-3"></i> All packages include <strong>20 Statics</strong> for free.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular Packages -->
-    <section class="py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-white mb-12 text-center">Popular Configurations</h2>
-            
-            <div class="grid md:grid-cols-4 gap-6">
-                <!-- Pack 1 -->
-                <div class="bg-brand-card border border-white/5 rounded-xl p-6 hover:border-brand-accent/30 transition">
-                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Starter Mix</div>
-                    <div class="text-2xl font-bold text-white mb-4">9 Angles</div>
-                    <div class="space-y-2 text-sm text-gray-400 mb-6 border-b border-white/5 pb-6">
-                        <div class="flex justify-between"><span>1 Pro Creator</span> <span>(4 angles)</span></div>
-                        <div class="flex justify-between"><span>1 Core Creator</span> <span>(5 angles)</span></div>
-                    </div>
-                    <div class="text-xl font-bold text-white">$5,000</div>
-                </div>
-
-                <!-- Pack 2 -->
-                <div class="bg-brand-card border border-white/5 rounded-xl p-6 hover:border-brand-accent/30 transition relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-brand-accent text-white text-[10px] font-bold px-2 py-1">POPULAR</div>
-                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Growth</div>
-                    <div class="text-2xl font-bold text-white mb-4">14 Angles</div>
-                    <div class="space-y-2 text-sm text-gray-400 mb-6 border-b border-white/5 pb-6">
-                        <div class="flex justify-between"><span>1 Pro Creator</span> <span>(4 angles)</span></div>
-                        <div class="flex justify-between"><span>2 Core Creators</span> <span>(10 angles)</span></div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="text-xl font-bold text-white">$6,300</div>
-                        <div class="text-sm text-gray-500 line-through">$7,000</div>
-                    </div>
-                    <div class="text-xs text-brand-success mt-1">10% Volume Discount</div>
-                </div>
-
-                <!-- Pack 3 -->
-                <div class="bg-brand-card border border-white/5 rounded-xl p-6 hover:border-brand-accent/30 transition">
-                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Scale</div>
-                    <div class="text-2xl font-bold text-white mb-4">18 Angles</div>
-                    <div class="space-y-2 text-sm text-gray-400 mb-6 border-b border-white/5 pb-6">
-                        <div class="flex justify-between"><span>2 Pro Creators</span> <span>(8 angles)</span></div>
-                        <div class="flex justify-between"><span>2 Core Creators</span> <span>(10 angles)</span></div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="text-xl font-bold text-white">$8,500</div>
-                        <div class="text-sm text-gray-500 line-through">$10,000</div>
-                    </div>
-                    <div class="text-xs text-brand-success mt-1">15% Volume Discount</div>
-                </div>
-
-                <!-- Pack 4 -->
-                <div class="bg-brand-card border border-white/5 rounded-xl p-6 hover:border-brand-accent/30 transition">
-                    <div class="text-brand-muted text-xs font-bold uppercase tracking-wider mb-2">Expansion</div>
-                    <div class="text-2xl font-bold text-white mb-4">27 Angles</div>
-                    <div class="space-y-2 text-sm text-gray-400 mb-6 border-b border-white/5 pb-6">
-                        <div class="flex justify-between"><span>3 Pro Creators</span> <span>(12 angles)</span></div>
-                        <div class="flex justify-between"><span>3 Core Creators</span> <span>(15 angles)</span></div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="text-xl font-bold text-white">$12,000</div>
-                        <div class="text-sm text-gray-500 line-through">$15,000</div>
-                    </div>
-                    <div class="text-xs text-brand-success mt-1">20% Volume Discount</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section class="py-20 bg-brand-dark border-t border-white/10" id="calculator">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white mb-4">Build Your Custom Package</h2>
-                <p class="text-gray-400">Mix and match creators to fit your budget. Discounts apply automatically.</p>
-            </div>
-
-            <div class="bg-brand-card border border-white/10 rounded-2xl p-8 shadow-2xl">
-                
-                <!-- Controls -->
-                <div class="grid md:grid-cols-3 gap-8 mb-8">
-                    <!-- Pro Input -->
-                    <div>
-                        <label class="block text-sm font-bold text-white mb-2">Pro Creators</label>
-                        <div class="flex items-center gap-3">
-                            <button onclick="updateCount('pro', -1)" class="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
-                            <input type="number" id="pro-count" value="1" readonly class="w-16 h-10 bg-transparent text-center text-white font-mono text-lg focus:outline-none">
-                            <button onclick="updateCount('pro', 1)" class="w-10 h-10 rounded-lg bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition border border-transparent shadow-[0_0_10px_rgba(93,92,222,0.3)]"><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-2">4 angles each</div>
-                    </div>
-
-                    <!-- Core Input -->
-                    <div>
-                        <label class="block text-sm font-bold text-white mb-2">Core Creators</label>
-                        <div class="flex items-center gap-3">
-                            <button onclick="updateCount('core', -1)" class="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
-                            <input type="number" id="core-count" value="1" readonly class="w-16 h-10 bg-transparent text-center text-white font-mono text-lg focus:outline-none">
-                            <button onclick="updateCount('core', 1)" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-2">5 angles each</div>
-                    </div>
-
-                    <!-- Statics Input -->
-                    <div>
-                        <label class="block text-sm font-bold text-white mb-2">Additional Statics</label>
-                        <div class="flex items-center gap-3">
-                            <button onclick="updateCount('static', -1)" class="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
-                            <!-- Start value 0 (which means 20 free). Display logic handles the number shown. -->
-                            <input type="text" id="static-display" value="20" readonly class="w-16 h-10 bg-transparent text-center text-white font-mono text-lg focus:outline-none">
-                            <button onclick="updateCount('static', 1)" class="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-plus"></i></button>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-2">20 Statics included free</div>
-                    </div>
-                </div>
-
-                <!-- Summary Board -->
-                <div class="border-t border-white/10 pt-8 mt-8">
-                    <div class="flex flex-col md:flex-row justify-between items-end gap-6">
-                        
-                        <!-- Breakdown -->
-                        <div class="space-y-2 text-sm w-full md:w-auto">
-                            <div class="flex justify-between md:justify-start gap-8 text-gray-400">
-                                <span>Total Angles:</span>
-                                <span class="text-white font-bold" id="total-angles">9</span>
-                            </div>
-                            <div class="flex justify-between md:justify-start gap-8 text-gray-400">
-                                <span>Total Statics:</span>
-                                <span class="text-white font-bold" id="total-statics">20</span>
-                            </div>
-                            <div class="flex justify-between md:justify-start gap-8 text-gray-400 pt-2">
-                                <span>Subtotal:</span>
-                                <span class="text-white" id="subtotal-price">$5,000</span>
-                            </div>
-                            <div class="flex justify-between md:justify-start gap-8 text-brand-success hidden" id="discount-row">
-                                <span>Volume Discount:</span>
-                                <span class="font-bold" id="discount-amount">-$0</span>
-                            </div>
-                            <!-- Added Warning Row -->
-                            <div class="flex justify-between md:justify-start gap-8 text-yellow-500 hidden" id="min-price-row">
-                                <span>Note:</span>
-                                <!-- Updated text -->
-                                <span class="font-bold text-xs uppercase tracking-wide pt-1">Minimum Package is $5,000</span>
-                            </div>
-                        </div>
-
-                        <!-- Total Price -->
-                        <div class="text-right w-full md:w-auto">
-                            <div class="text-xs text-gray-500 mb-1">Estimated Monthly Cost</div>
-                            <div class="text-4xl font-bold text-white tracking-tight" id="final-price">$5,000</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Discount Tiers Info Widget -->
-            <div class="mt-12 bg-white/5 border border-white/10 rounded-xl p-6">
-                <div class="text-center mb-6">
-                    <h3 class="text-white font-bold text-lg"><i class="fa-solid fa-tags text-brand-accent mr-2"></i>Volume Savings</h3>
-                    <p class="text-sm text-gray-400">Discounts are automatically applied based on total spend.</p>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="bg-brand-dark rounded-lg p-3 text-center border border-white/5">
-                        <div class="text-xs text-gray-500 uppercase tracking-wide">Over $7k</div>
-                        <div class="text-brand-success font-bold text-xl">10% OFF</div>
-                    </div>
-                    <div class="bg-brand-dark rounded-lg p-3 text-center border border-white/5">
-                        <div class="text-xs text-gray-500 uppercase tracking-wide">Over $10k</div>
-                        <div class="text-brand-success font-bold text-xl">15% OFF</div>
-                    </div>
-                    <div class="bg-brand-dark rounded-lg p-3 text-center border border-white/5">
-                        <div class="text-xs text-gray-500 uppercase tracking-wide">Over $15k</div>
-                        <div class="text-brand-success font-bold text-xl">20% OFF</div>
-                    </div>
-                    <div class="bg-brand-dark rounded-lg p-3 text-center border border-white/5">
-                        <div class="text-xs text-gray-500 uppercase tracking-wide">Over $20k</div>
-                        <div class="text-brand-success font-bold text-xl">25% OFF</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Trust / Logos Section -->
-    <section class="py-12 border-t border-white/5 overflow-hidden">
-        <div class="text-center mb-8">
-            <p class="text-white text-lg font-semibold">200+ ambitious brands trust Linear</p>
-        </div>
+    <div class="max-w-5xl w-full bg-brand-card border border-white/10 rounded-2xl p-8 shadow-2xl">
         
-        <div class="logo-scroll-container w-full max-w-6xl mx-auto">
-            <div class="flex gap-16 w-max animate-logo-loop items-center">
-                <!-- ORIGINAL LOGOS -->
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item" style="height: 45px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item" style="height: 45px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item invert brightness-0" style="height: 65px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item">
-
-                <!-- DUPLICATE SET -->
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121e16faa76df8f25118fc_download.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974a6_Logo%20box-3.png" alt="" class="logo-item" style="height: 45px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6743424cbafac6f9f3c974fc_image%2016%20(3).png" alt="" class="logo-item" style="height: 45px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/681dfde7830e14265d7adc33_maelys.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674443f3f8bfed847493d6ac_download__5_-removebg-preview.png" alt="" class="logo-item invert brightness-0" style="height: 65px;">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f2ef136cb1d43cd3666_download.webp" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/68121f781cb9b3d5812f2441_leonisa.svg" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/674441aaf250833924ce7e66_image%20(87).png" alt="" class="logo-item">
-                <img src="https://cdn.prod.website-files.com/6743424cbafac6f9f3c97404/6744424d6b18f1859a899423_image%20(89).png" alt="" class="logo-item">
+        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-white uppercase">UGC Pricing Calculator</h1>
+                <p class="text-gray-400 text-sm mt-1">Calculate custom UGC package pricing with margin protection.</p>
+            </div>
+            <div class="px-4 py-2 bg-brand-accent/10 border border-brand-accent/20 rounded-lg text-brand-accent text-xs font-bold uppercase tracking-wider">
+                Internal Use Only
             </div>
         </div>
-    </section>
 
-    <!-- Final CTA Section -->
-    <section class="py-24 bg-gradient-to-b from-brand-dark to-brand-card border-t border-white/5">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold text-white mb-6 leading-tight">Ready to scale your brand with <br><span class="text-brand-accent">high-performing UGC Creatives?</span></h2>
-            <div class="flex justify-center mt-8">
-                <a href="https://www.wearelinear.com/booking-page" class="group relative px-10 py-5 bg-brand-accent hover:bg-brand-accentHover text-white text-lg font-bold rounded-full transition-all duration-300 flex items-center gap-3 shadow-[0_0_20px_rgba(93,92,222,0.4)] hover:shadow-[0_0_40px_rgba(93,92,222,0.6)]">
-                    Book a strategy call to get started
-                    <i class="fa-solid fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
-                </a>
+        <div class="grid lg:grid-cols-2 gap-12">
+            
+            <!-- CONTROLS -->
+            <div class="space-y-8">
+                <!-- Premium Angles -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="font-bold text-white">Premium Angles</label>
+                        <span class="text-xs text-brand-muted">($187.50/angle)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('premium', -4)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="premium-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('premium', 4)" class="w-12 h-12 rounded-lg bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition shadow-lg shadow-brand-accent/20"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="mt-2 text-right text-xs text-gray-500">Increments of 4</div>
+                </div>
+
+                <!-- Regular Angles -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="font-bold text-white">Regular Angles</label>
+                        <span class="text-xs text-brand-muted">($70.00/angle)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('regular', -5)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="regular-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('regular', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="mt-2 text-right text-xs text-gray-500">Increments of 5</div>
+                </div>
+
+                <!-- Statics -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="font-bold text-white">Statics</label>
+                        <span class="text-xs text-brand-muted">($8.00/static)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('static', -5)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="static-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('static', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="mt-2 text-right text-xs text-gray-500">Increments of 5</div>
+                </div>
+            </div>
+
+            <!-- RESULTS -->
+            <div class="space-y-6">
+                
+                <!-- Package Summary -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Package Summary</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
+                            <span class="text-gray-400">Total Angles:</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-angles">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Total Statics:</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-statics">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COGS Breakdown -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Cost Analysis (COGS)</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Premium Production Cost:</span>
+                            <span class="text-white font-mono" id="cogs-premium">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Regular Production Cost:</span>
+                            <span class="text-white font-mono" id="cogs-regular">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Static Production Cost:</span>
+                            <span class="text-white font-mono" id="cogs-static">$0.00</span>
+                        </div>
+                        <div class="border-t border-white/10 my-2 pt-2 flex justify-between font-bold">
+                            <span class="text-brand-muted">Total COGS:</span>
+                            <span class="text-brand-warning font-mono" id="cogs-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Margin Logic -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Pricing Strategy</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex justify-between items-end mb-1">
+                            <span class="text-gray-400 text-sm">Min Price for 80% Margin</span>
+                            <span class="text-white font-bold font-mono text-lg" id="price-floor">$0.00</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5">
+                            <div class="bg-brand-success h-1.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-gray-400 text-sm">Volume Discount Tier</span>
+                            <span class="px-2 py-1 rounded bg-white/10 text-xs font-bold text-white" id="discount-badge">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-accent/10 border border-brand-accent rounded-lg p-4 text-center">
+                        <div class="text-xs text-brand-accent font-bold uppercase tracking-wider mb-2">Recommended Pricing</div>
+                        
+                        <div class="space-y-1 mb-4">
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Standard Price:</span>
+                                <span class="text-white font-mono line-through" id="standard-price">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-brand-success">
+                                <span>Volume Discount (<span id="discount-percent">0%</span>):</span>
+                                <span class="font-mono" id="discount-amount">-$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="text-4xl font-extrabold text-white tracking-tight pt-2 border-t border-brand-accent/20" id="final-price">$0</div>
+                        
+                        <div class="text-xs text-gray-400 mt-3 flex flex-col gap-1 items-center">
+                            <div class="flex justify-between w-full max-w-[200px]"><span>Net Revenue:</span> <span id="net-revenue" class="text-white font-mono font-bold">$0</span></div>
+                            <div class="flex justify-between w-full max-w-[200px]"><span>Gross Profit:</span> <span id="gross-profit" class="text-brand-success font-mono font-bold">$0</span></div>
+                            <div class="flex justify-between w-full max-w-[200px]"><span>Margin:</span> <span id="final-margin" class="text-gray-300 font-bold">0%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discount Legend -->
+                <div class="grid grid-cols-4 gap-2 text-center text-[10px] text-gray-500 opacity-60">
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        >$7k = 10%
+                    </div>
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        >$10k = 15%
+                    </div>
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        >$15k = 20%
+                    </div>
+                    <div class="bg-white/5 p-2 rounded border border-white/5">
+                        >$20k = 25%
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
 
-    <footer class="bg-black py-12 text-center border-t border-white/5 mt-12">
-        <div class="text-gray-600 text-sm">&copy; 2025 Linear Agency.</div>
-    </footer>
+        <!-- SECTION 2: REVERSE CALCULATOR -->
+        <div class="mt-12 w-full bg-brand-card border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <div class="mb-8 border-b border-white/10 pb-6">
+                <h2 class="text-2xl font-bold text-white uppercase"><i class="fa-solid fa-calculator mr-2 text-brand-muted"></i> Reverse Margin Calculator</h2>
+                <p class="text-gray-400 text-sm mt-1">Check profitability on a client's specific proposal.</p>
+            </div>
 
-    <!-- Logic Script -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Proposal Inputs -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                        <label class="block text-sm font-bold text-white mb-2">Proposed Package Price</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">$</span>
+                            <input type="number" id="proposal-price" class="w-full bg-white/5 border border-white/10 rounded-lg px-8 py-3 text-white focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition" placeholder="e.g. 5000" oninput="calculateReverse()">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Reverse Premium -->
+                        <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
+                            <label class="block text-xs font-bold text-gray-400 mb-3">Premium Angles</label>
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="updateReverseCount('premium', -4)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <input type="number" id="rev-premium" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
+                                <button onclick="updateReverseCount('premium', 4)" class="w-8 h-8 rounded bg-brand-accent hover:bg-brand-accentHover text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                            <!-- REMOVED: Steps of 4 -->
+                        </div>
+
+                        <!-- Reverse Regular -->
+                        <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
+                            <label class="block text-xs font-bold text-gray-400 mb-3">Regular Angles</label>
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="updateReverseCount('regular', -5)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <input type="number" id="rev-regular" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
+                                <button onclick="updateReverseCount('regular', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                            <!-- REMOVED: Steps of 5 -->
+                        </div>
+
+                        <!-- Reverse Static -->
+                        <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
+                            <label class="block text-xs font-bold text-gray-400 mb-3">Statics</label>
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="updateReverseCount('static', -5)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <input type="number" id="rev-static" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
+                                <button onclick="updateReverseCount('static', 5)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                            <!-- REMOVED: Steps of 5 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reverse Results -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5 flex flex-col justify-center">
+                    
+                    <!-- NEW: Package Summary in Reverse -->
+                    <div class="mb-6 border-b border-white/5 pb-4">
+                        <div class="flex justify-between text-sm text-gray-400 mb-1">
+                            <span>Total Angles:</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-angles">0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400">
+                            <span>Total Statics:</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-statics">0</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Estimated Cost (COGS)</div>
+                        <div class="text-2xl font-mono text-white" id="rev-cogs">$0.00</div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="text-xs text-gray-500 uppercase tracking-widest mb-1">Gross Profit</div>
+                        <div class="text-2xl font-mono text-brand-success" id="rev-profit">$0.00</div>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-bold text-white">Final Margin</span>
+                            <span class="text-xl font-bold" id="rev-margin">0%</span>
+                        </div>
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                            <div id="rev-margin-bar" class="bg-brand-success h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <p id="rev-status" class="text-xs text-center mt-2 font-medium text-gray-500">Enter details...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Logic -->
     <script>
-        const PRO_PRICE = 3000;
-        const CORE_PRICE = 2000;
-        const STATIC_BATCH_PRICE = 250;
-        const PRO_ANGLES = 4;
-        const CORE_ANGLES = 5;
-        const STATIC_BATCH_SIZE = 5;
-        const BASE_STATICS = 20;
+        // UNIT COSTS
+        const COST_PREMIUM_ANGLE = 187.50;
+        const COST_REGULAR_ANGLE = 70.00;
+        const COST_STATIC = 8.00;
+
+        // TARGET MARGIN
+        const TARGET_MARGIN = 0.80; // 80%
 
         let counts = {
-            pro: 1,
-            core: 1,
+            premium: 0,
+            regular: 0,
             static: 0
         };
+
+        // --- FORWARD CALCULATOR ---
 
         function updateCount(type, change) {
             const newCount = counts[type] + change;
             if (newCount < 0) return;
-            
             counts[type] = newCount;
             
-            if (type !== 'static') {
-                document.getElementById(`${type}-count`).value = counts[type];
-            } else {
-                // For static, we display the total number of statics (20 + extra)
-                document.getElementById('static-display').value = BASE_STATICS + (counts.static * STATIC_BATCH_SIZE);
-            }
-            
-            calculateTotal();
+            // Input shows Total Count directly
+            document.getElementById(`${type}-count`).value = counts[type];
+            calculate();
         }
 
-        function calculateTotal() {
-            // Raw Costs
-            const proCost = counts.pro * PRO_PRICE;
-            const coreCost = counts.core * CORE_PRICE;
-            const staticCost = counts.static * STATIC_BATCH_PRICE;
+        function calculate() {
+            // 1. Calculate Totals
+            const totalAngles = counts.premium + counts.regular;
+
+            // 2. Calculate COGS (Cost of Goods Sold)
+            const cogsPremium = counts.premium * COST_PREMIUM_ANGLE;
+            const cogsRegular = counts.regular * COST_REGULAR_ANGLE;
+            const cogsStatic = counts.static * COST_STATIC;
             
-            // Calculate raw sum first
-            let rawSum = proCost + coreCost + staticCost;
+            const totalCOGS = cogsPremium + cogsRegular + cogsStatic;
+
+            // 3. Calculate Minimum Sell Price to hit 80% Margin (Net Revenue needed)
+            // Net Revenue - COGS = Margin * Net Revenue  =>  Net Revenue * (1 - Margin) = COGS
+            const requiredNetRevenue = totalCOGS > 0 ? (totalCOGS / (1 - TARGET_MARGIN)) : 0;
+
+            // 4. Calculate Standard List Price (Pre-Discount)
+            // We need a Standard Price X such that: X * (1 - discount_rate) >= requiredNetRevenue
+            // We solve this by finding the lowest X that satisfies the discount tier thresholds.
             
-            // Enforce $5,000 Minimum Package Price
-            let subtotal = rawSum;
-            let isMinPrice = false;
+            // Base case: No discount
+            let standardPrice = requiredNetRevenue;
+            let discountRate = 0;
+
+            // Iteratively bump up the price to account for discounts at various levels
             
-            if (rawSum < 5000) {
-                subtotal = 5000;
-                isMinPrice = true;
+            // Check if we qualify for 25% discount (>20k list)
+            // Price needed if 25% off:
+            let priceFor25 = requiredNetRevenue / 0.75;
+            if (priceFor25 > 20000) {
+                standardPrice = priceFor25;
+                discountRate = 0.25;
+            } else {
+                // Check 20% discount (>15k list)
+                let priceFor20 = requiredNetRevenue / 0.80;
+                if (priceFor20 > 15000) {
+                    standardPrice = priceFor20;
+                    discountRate = 0.20;
+                } else {
+                    // Check 15% discount (>10k list)
+                    let priceFor15 = requiredNetRevenue / 0.85;
+                    if (priceFor15 > 10000) {
+                        standardPrice = priceFor15;
+                        discountRate = 0.15;
+                    } else {
+                        // Check 10% discount (>7k list)
+                        let priceFor10 = requiredNetRevenue / 0.90;
+                        if (priceFor10 > 7000) {
+                            standardPrice = priceFor10;
+                            discountRate = 0.10;
+                        } else {
+                            // No discount
+                            standardPrice = requiredNetRevenue;
+                            discountRate = 0;
+                        }
+                    }
+                }
             }
 
-            // Deliverables
-            const totalAngles = (counts.pro * PRO_ANGLES) + (counts.core * CORE_ANGLES);
-            const totalStatics = BASE_STATICS + (counts.static * STATIC_BATCH_SIZE);
+            // 5. Final Calculations
+            const discountVal = standardPrice * discountRate;
+            const finalPrice = standardPrice - discountVal; // This should be >= requiredNetRevenue
+            const grossProfit = finalPrice - totalCOGS;
+            const actualMargin = finalPrice > 0 ? (grossProfit / finalPrice) * 100 : 0;
 
-            // Discount Logic (Only applies if above min threshold actually reached)
-            let discountPercent = 0;
-            if (subtotal >= 20000) discountPercent = 0.25;
-            else if (subtotal >= 15000) discountPercent = 0.20;
-            else if (subtotal >= 10000) discountPercent = 0.15;
-            else if (subtotal >= 7000) discountPercent = 0.10;
+            // 6. Update UI
+            
+            // Summary Box
+            document.getElementById('summary-angles').innerText = totalAngles;
+            document.getElementById('summary-statics').innerText = counts.static;
 
-            const discountAmount = subtotal * discountPercent;
-            const finalPrice = subtotal - discountAmount;
+            // COGS
+            document.getElementById('cogs-premium').innerText = formatMoney(cogsPremium);
+            document.getElementById('cogs-regular').innerText = formatMoney(cogsRegular);
+            document.getElementById('cogs-static').innerText = formatMoney(cogsStatic);
+            document.getElementById('cogs-total').innerText = formatMoney(totalCOGS);
 
-            // Update DOM
-            document.getElementById('total-angles').innerText = totalAngles;
-            document.getElementById('total-statics').innerText = totalStatics;
-            document.getElementById('subtotal-price').innerText = formatMoney(subtotal);
+            // Pricing
+            document.getElementById('price-floor').innerText = formatMoney(requiredNetRevenue);
+            
+            document.getElementById('standard-price').innerText = formatMoney(standardPrice);
+            document.getElementById('discount-percent').innerText = (discountRate * 100) + '%';
+            document.getElementById('discount-amount').innerText = '-' + formatMoney(discountVal);
+            
             document.getElementById('final-price').innerText = formatMoney(finalPrice);
 
-            // Toggle Discount Row
-            const discountRow = document.getElementById('discount-row');
-            const minPriceRow = document.getElementById('min-price-row');
-
-            if (discountPercent > 0) {
-                discountRow.classList.remove('hidden');
-                discountRow.classList.add('flex');
-                document.getElementById('discount-amount').innerText = `-${formatMoney(discountAmount)} (${discountPercent * 100}%)`;
+            // Stats
+            document.getElementById('net-revenue').innerText = formatMoney(finalPrice);
+            document.getElementById('gross-profit').innerText = formatMoney(grossProfit);
+            
+            const marginEl = document.getElementById('final-margin');
+            marginEl.innerText = actualMargin.toFixed(1) + '%';
+            
+            if (actualMargin < 79.9) { 
+                marginEl.classList.remove('text-brand-success');
+                marginEl.classList.add('text-brand-danger');
             } else {
-                discountRow.classList.add('hidden');
-                discountRow.classList.remove('flex');
+                marginEl.classList.remove('text-brand-danger');
+                marginEl.classList.add('text-brand-success');
             }
+        }
 
-            // Toggle Min Price Warning
-            if (isMinPrice) {
-                minPriceRow.classList.remove('hidden');
-                minPriceRow.classList.add('flex');
+        // --- REVERSE CALCULATOR ---
+
+        // Reverse state
+        let revCounts = {
+            premium: 0,
+            regular: 0,
+            static: 0
+        };
+
+        function updateReverseCount(type, change) {
+            const newCount = revCounts[type] + change;
+            if (newCount < 0) return;
+            
+            revCounts[type] = newCount;
+            document.getElementById(`rev-${type}`).value = revCounts[type];
+            calculateReverse();
+        }
+
+        function calculateReverse() {
+            const price = parseFloat(document.getElementById('proposal-price').value) || 0;
+            const pAngles = revCounts.premium;
+            const rAngles = revCounts.regular;
+            const statics = revCounts.static;
+
+            const cogs = (pAngles * COST_PREMIUM_ANGLE) + (rAngles * COST_REGULAR_ANGLE) + (statics * COST_STATIC);
+            const profit = price - cogs;
+            const margin = price > 0 ? (profit / price) * 100 : 0;
+            
+            const totalAngles = pAngles + rAngles;
+
+            // UI Update
+            document.getElementById('rev-cogs').innerText = formatMoney(cogs);
+            document.getElementById('rev-total-angles').innerText = totalAngles;
+            document.getElementById('rev-total-statics').innerText = statics;
+            
+            const profitEl = document.getElementById('rev-profit');
+            profitEl.innerText = formatMoney(profit);
+            
+            // Color Logic
+            const marginEl = document.getElementById('rev-margin');
+            const barEl = document.getElementById('rev-margin-bar');
+            const statusEl = document.getElementById('rev-status');
+
+            marginEl.innerText = margin.toFixed(1) + '%';
+            barEl.style.width = Math.min(Math.max(margin, 0), 100) + '%'; // Clamp 0-100
+
+            if (margin >= 80) {
+                // Good
+                profitEl.className = "text-2xl font-mono text-brand-success";
+                marginEl.className = "text-xl font-bold text-brand-success";
+                barEl.className = "h-2 rounded-full transition-all duration-500 bg-brand-success";
+                statusEl.innerText = "Excellent. Meets 80% margin target.";
+                statusEl.className = "text-xs text-center mt-2 font-medium text-brand-success";
+            } else if (margin >= 60) {
+                // Okay
+                profitEl.className = "text-2xl font-mono text-brand-warning";
+                marginEl.className = "text-xl font-bold text-brand-warning";
+                barEl.className = "h-2 rounded-full transition-all duration-500 bg-brand-warning";
+                statusEl.innerText = "Caution. Below 80% target but profitable.";
+                statusEl.className = "text-xs text-center mt-2 font-medium text-brand-warning";
             } else {
-                minPriceRow.classList.add('hidden');
-                minPriceRow.classList.remove('flex');
+                // Bad
+                profitEl.className = "text-2xl font-mono text-brand-danger";
+                marginEl.className = "text-xl font-bold text-brand-danger";
+                barEl.className = "h-2 rounded-full transition-all duration-500 bg-brand-danger";
+                statusEl.innerText = "Warning. Margin is too low.";
+                statusEl.className = "text-xs text-center mt-2 font-medium text-brand-danger";
             }
         }
 
         function formatMoney(amount) {
-            return '$' + amount.toLocaleString('en-US');
+            return '$' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // Init
-        calculateTotal();
+        calculate();
     </script>
+
 </body>
 </html>
