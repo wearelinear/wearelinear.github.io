@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Marketing — CEO Churn Report 2024–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #090910;
+    --bg-2: #0f0f1a;
+    --bg-3: #141428;
+    --surface: #1a1a2e;
+    --surface-2: #22223a;
+    --border: rgba(255,255,255,0.07);
+    --border-gold: rgba(240,168,32,0.25);
+    --white: #f2ede4;
+    --white-dim: rgba(242,237,228,0.55);
+    --white-faint: rgba(242,237,228,0.2);
+    --gold: #f0a820;
+    --gold-dim: rgba(240,168,32,0.15);
+    --gold-bright: #f5c842;
+    --teal: #3dd6c8;
+    --teal-dim: rgba(61,214,200,0.12);
+    --red: #f05a5a;
+    --red-dim: rgba(240,90,90,0.12);
+    --red-bright: #ff6b6b;
+    --amber: #ff9f43;
+    --blue: #4a9eff;
+    --blue-dim: rgba(74,158,255,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── GRAIN OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.3;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(9,9,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  .nav-brand span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--white-faint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 120px 48px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 56px;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), var(--border-gold), var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ════════════════════════════════════
+     HERO
+  ════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(240,168,32,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 100px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.4s;
+  }
+
+  .hero-headline .accent {
+    font-style: italic;
+    color: var(--red-bright);
+  }
+
+  .hero-headline .gold { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--white-dim);
+    max-width: 560px;
+    line-height: 1.75;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.6s;
+    margin-bottom: 64px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.8s;
+  }
+
+  .hero-stat {
+    padding: 28px 48px 28px 0;
+    border-right: 1px solid var(--border);
+    margin-right: 48px;
+  }
+
+  .hero-stat:last-child { border-right: none; }
+
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--white);
+    display: block;
+  }
+
+  .hero-stat-num.red { color: var(--red-bright); }
+  .hero-stat-num.gold { color: var(--gold); }
+  .hero-stat-num.teal { color: var(--teal); }
+
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .hero-quote-block {
+    margin-top: 80px;
+    padding: 32px 40px;
+    background: var(--red-dim);
+    border-left: 3px solid var(--red-bright);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 1.0s;
+  }
+
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .hero-quote-source {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+  }
+
+  /* ════════════════════════════════════
+     BIG PICTURE
+  ════════════════════════════════════ */
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-bottom: 64px;
+    background: var(--border);
+  }
+
+  .stat-card {
+    background: var(--bg-2);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .stat-card:hover { background: var(--surface); }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .stat-card.red::before { background: var(--red-bright); }
+  .stat-card.gold::before { background: var(--gold); }
+  .stat-card.teal::before { background: var(--teal); }
+  .stat-card.blue::before { background: var(--blue); }
+
+  .stat-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 600;
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .stat-card.red .stat-card-num { color: var(--red-bright); }
+  .stat-card.gold .stat-card-num { color: var(--gold); }
+  .stat-card.teal .stat-card-num { color: var(--teal); }
+  .stat-card.blue .stat-card-num { color: var(--blue); }
+
+  .stat-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 16px;
+  }
+
+  .stat-card-desc {
+    font-size: 13px;
+    color: var(--white-faint);
+    line-height: 1.5;
+  }
+
+  .insight-box {
+    background: var(--gold-dim);
+    border: 1px solid var(--border-gold);
+    padding: 28px 36px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .insight-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--gold-bright);
+    line-height: 1.5;
+  }
+
+  /* ════════════════════════════════════
+     WHY THEY LEAVE
+  ════════════════════════════════════ */
+
+  .chart-container {
+    position: relative;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .chart-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--white-faint);
+    letter-spacing: 0.1em;
+    margin-top: 20px;
+    text-align: right;
+  }
+
+  /* ════════════════════════════════════
+     WARNING WINDOW
+  ════════════════════════════════════ */
+
+  .warning-timeline {
+    position: relative;
+    padding: 20px 0;
+  }
+
+  .timeline-track {
+    position: relative;
+    height: 4px;
+    background: var(--surface-2);
+    margin: 60px 0 80px;
+    border-radius: 2px;
+  }
+
+  .timeline-track::before {
+    content: 'CHURN';
+    position: absolute;
+    right: 0;
+    top: -24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--red-bright);
+  }
+
+  .timeline-track::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -8px;
+    width: 20px;
+    height: 20px;
+    background: var(--red-bright);
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+  }
+
+  .timeline-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--gold), var(--red-bright));
+    border-radius: 2px;
+    width: 100%;
+  }
+
+  .timeline-signals {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0;
+    margin-top: -140px;
+  }
+
+  .signal-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .signal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  .signal-dot.early { border-color: var(--teal); background: var(--teal-dim); }
+  .signal-dot.mid { border-color: var(--gold); background: var(--gold-dim); }
+  .signal-dot.late { border-color: var(--red-bright); background: var(--red-dim); }
+
+  .signal-connector {
+    width: 1px;
+    background: currentColor;
+    opacity: 0.3;
+  }
+
+  .signal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-align: center;
+    padding: 0 4px;
+    line-height: 1.4;
+  }
+
+  .signal-weeks {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .signal-weeks-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  /* Better warning layout */
+  .warning-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .warning-card {
+    background: var(--bg-2);
+    padding: 28px 24px;
+    position: relative;
+  }
+
+  .warning-weeks {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 600;
+    line-height: 1;
+    display: block;
+  }
+
+  .warning-card.early .warning-weeks { color: var(--teal); }
+  .warning-card.mid .warning-weeks { color: var(--gold); }
+  .warning-card.late .warning-weeks { color: var(--red-bright); }
+
+  .warning-wk {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--white-dim);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .warning-signal-text {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .urgency-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    display: inline-block;
+  }
+
+  .urgency-badge.early { background: var(--teal-dim); color: var(--teal); }
+  .urgency-badge.mid { background: var(--gold-dim); color: var(--gold); }
+  .urgency-badge.late { background: var(--red-dim); color: var(--red-bright); }
+
+  /* ════════════════════════════════════
+     MATRIX
+  ════════════════════════════════════ */
+
+  .matrix-wrapper {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: 1fr 40px;
+    gap: 0;
+    height: 580px;
+  }
+
+  .matrix-y-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .matrix-x-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2;
+  }
+
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .matrix-cell {
+    background: var(--bg-2);
+    padding: 28px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .matrix-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding: 4px 10px;
+    display: inline-block;
+    align-self: flex-start;
+  }
+
+  .matrix-cell.q1 .matrix-cell-label { background: rgba(61,214,200,0.1); color: var(--teal); }
+  .matrix-cell.q2 .matrix-cell-label { background: rgba(240,168,32,0.1); color: var(--gold); }
+  .matrix-cell.q3 .matrix-cell-label { background: rgba(240,90,90,0.1); color: var(--red-bright); }
+  .matrix-cell.q4 .matrix-cell-label { background: rgba(255,255,255,0.05); color: var(--white-dim); }
+
+  .matrix-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .matrix-item {
+    font-size: 12px;
+    color: var(--white);
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.03);
+    border-left: 2px solid;
+    line-height: 1.4;
+  }
+
+  .q1 .matrix-item { border-color: var(--teal); }
+  .q2 .matrix-item { border-color: var(--gold); }
+  .q3 .matrix-item { border-color: var(--red-bright); }
+  .q4 .matrix-item { border-color: rgba(255,255,255,0.15); }
+
+  .matrix-axis-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white-faint);
+    position: absolute;
+  }
+
+  /* ════════════════════════════════════
+     THE 8 FIXES
+  ════════════════════════════════════ */
+
+  .fixes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .fix-card {
+    background: var(--bg-2);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .fix-card:hover { background: var(--surface); }
+
+  .fix-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.3;
+    transition: opacity 0.2s;
+  }
+
+  .fix-card:hover .fix-number { opacity: 0.7; }
+
+  .fix-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .fix-body {
+    font-size: 13px;
+    color: var(--white-dim);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .fix-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .fix-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+  }
+
+  .fix-tag.owner { background: var(--blue-dim); color: var(--blue); }
+  .fix-tag.timeline { background: var(--gold-dim); color: var(--gold); }
+  .fix-tag.priority-critical { background: var(--red-dim); color: var(--red-bright); }
+  .fix-tag.priority-high { background: rgba(255,159,67,0.1); color: var(--amber); }
+  .fix-tag.priority-medium { background: var(--teal-dim); color: var(--teal); }
+
+  /* ════════════════════════════════════
+     METRICS DASHBOARD
+  ════════════════════════════════════ */
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    margin-bottom: 2px;
+  }
+
+  .metric-card {
+    background: var(--bg-2);
+    padding: 32px 28px;
+  }
+
+  .metric-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 20px;
+  }
+
+  .metric-thresholds {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .threshold {
+    display: grid;
+    grid-template-columns: 12px 1fr auto;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .threshold-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .green .threshold-dot { background: var(--teal); }
+  .yellow .threshold-dot { background: var(--gold); }
+  .red .threshold-dot { background: var(--red-bright); }
+
+  .threshold-label {
+    font-size: 12px;
+    color: var(--white);
+  }
+
+  .threshold-value {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .green .threshold-value { color: var(--teal); }
+  .yellow .threshold-value { color: var(--gold); }
+  .red .threshold-value { color: var(--red-bright); }
+
+  .churn-predictor {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background-color: var(--border);
+  }
+
+  .predictor-item {
+    background: var(--bg-2);
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .predictor-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--red-bright);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .predictor-label {
+    font-size: 12px;
+    color: var(--white-dim);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .predictor-trigger {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--white-faint);
+  }
+
+  /* ════════════════════════════════════
+     ENGAGEMENT CHART
+  ════════════════════════════════════ */
+
+  .engagement-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    margin-top: 2px;
+  }
+
+  .engagement-card {
+    background: var(--bg-2);
+    padding: 40px;
+  }
+
+  /* ════════════════════════════════════
+     FOOTER
+  ════════════════════════════════════ */
+
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--white-dim);
+  }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--white-faint);
+    letter-spacing: 0.15em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
+
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-brand">LINEAR <span>MARKETING</span> — INTELLIGENCE</div>
+  <ul class="nav-links">
+    <li><a href="#picture">Overview</a></li>
+    <li><a href="#why">Causes</a></li>
+    <li><a href="#warning">Signals</a></li>
+    <li><a href="#matrix">Matrix</a></li>
+    <li><a href="#fixes">Fixes</a></li>
+    <li><a href="#metrics">Metrics</a></li>
+  </ul>
+  <div class="nav-date">April 2026 · Confidential</div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" style="max-width:100%">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">CEO's Churn Report · 2024–2026 · 69 Clients Analyzed</div>
+    <h1 class="hero-headline">
+      We're losing clients<br>for <span class="accent">preventable</span><br>reasons.
+    </h1>
+    <p class="hero-sub">A systematic analysis of every client that left Linear Marketing between 2024 and 2026. What we found isn't flattering — but it's fixable.</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num red">69</span>
+        <span class="hero-stat-label">Clients Analyzed</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num gold">45%</span>
+        <span class="hero-stat-label">Left Over ROAS</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" style="color:var(--white)">16wks</span>
+        <span class="hero-stat-label">Avg Warning Lead Time</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num teal">16%</span>
+        <span class="hero-stat-label">Healthy Alumni Exits</span>
+      </div>
+    </div>
+
+    <div class="hero-quote-block">
+      <div class="hero-quote">"Those scripts are really bad. You didn't even proofread the scripts after you had AI write them for you. The actors don't do a bad job but the videos are essentially just one person talking into a camera with boring standard stock footage. An ignorant child could have done better."</div>
+      <div class="hero-quote-source">— Helmet Flair client, April 2025 · Contract terminated within 8 weeks</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BIG PICTURE ═══ -->
+<section id="picture">
+  <div class="section-label">Section 01</div>
+  <h2>The <em>scale</em> of the problem</h2>
+
+  <div class="stat-grid reveal">
+    <div class="stat-card red">
+      <span class="stat-card-num">69</span>
+      <div class="stat-card-label">Total Churned Clients</div>
+      <div class="stat-card-desc">Every departed client from 2024 to early 2026, analyzed across Slack, Gmail, Fireflies, and ClickUp.</div>
+    </div>
+    <div class="stat-card gold">
+      <span class="stat-card-num">77%</span>
+      <div class="stat-card-label">Preventable Exits</div>
+      <div class="stat-card-desc">Of all churns, roughly 53 had a clear preventable root cause — not external factors or natural endings.</div>
+    </div>
+    <div class="stat-card teal">
+      <span class="stat-card-num">2.8</span>
+      <div class="stat-card-label">Avg Causes Per Churn</div>
+      <div class="stat-card-desc">Most exits were multi-factor. ROAS issues + QC failures + communication gaps compound each other.</div>
+    </div>
+    <div class="stat-card blue">
+      <span class="stat-card-num">6mo</span>
+      <div class="stat-card-label">Avg Lost Relationship</div>
+      <div class="stat-card-desc">The average churned client had 6 months of potential remaining contract value at exit.</div>
+    </div>
+  </div>
+
+  <div class="insight-box reveal">
+    <div class="insight-icon">💡</div>
+    <div class="insight-text">
+      16% of what we're calling "churn" is actually <strong>healthy alumni</strong> — clients who completed a full creative package, got great results, and moved on naturally. Stop counting these as failures. The real churn rate is closer to <strong>84% of departures</strong>, not 100%.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WHY THEY LEAVE ═══ -->
+<section id="why">
+  <div class="section-label">Section 02</div>
+  <h2>Why they <em>actually</em> leave</h2>
+
+  <div class="chart-container reveal">
+    <canvas id="causesChart" height="340"></canvas>
+    <div class="chart-note">* Multiple causes per client — totals exceed 100%. N = 69 churned clients.</div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);margin-top:2px;" class="reveal">
+    <div style="background:var(--bg-2);padding:36px;">
+      <div class="section-label" style="margin-bottom:12px">Top Finding</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.3;margin-bottom:12px">
+        <strong style="color:var(--red-bright)">45%</strong> of clients left because ads were losing them money. We never had a documented breakeven conversation with <strong style="color:var(--gold)">69%</strong> of those clients.
+      </div>
+      <div style="font-size:13px;color:var(--white-dim);line-height:1.65">
+        This is the single highest-leverage fix available. If every new client has a documented breakeven ROAS on Day 1, and we trigger an alert at Day 10 below breakeven, we catch most performance churn before it becomes a cancellation.
+      </div>
+    </div>
+    <div style="background:var(--bg-2);padding:36px;">
+      <div class="section-label" style="margin-bottom:12px">Second Finding</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.3;margin-bottom:12px">
+        <strong style="color:var(--red-bright)">32%</strong> of exits cited creative quality. In multiple cases, a client's own organic content outperformed everything we delivered.
+      </div>
+      <div style="font-size:13px;color:var(--white-dim);line-height:1.65">
+        AI voiceovers, stock footage, and generic "performance" aesthetics are destroying trust with premium brands. Amen Fragrances' founder edited one TikTok himself and got <strong>100,000 views</strong>. We had been producing for months.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WARNING WINDOW ═══ -->
+<section id="warning">
+  <div class="section-label">Section 03</div>
+  <h2>The <em>warning window</em></h2>
+  <p style="color:var(--white-dim);max-width:640px;margin-bottom:48px;line-height:1.75">
+    On average, the first warning signal appears <strong style="color:var(--gold)">16 weeks</strong> before a client churns. We have more than enough time to intervene — if we know what to look for.
+  </p>
+
+  <div class="warning-cards reveal">
+    <div class="warning-card early">
+      <span class="warning-weeks">16</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">ROAS below client's stated breakeven for 2+ consecutive weeks</div>
+      <span class="urgency-badge early">Act within 48h</span>
+    </div>
+    <div class="warning-card early">
+      <span class="warning-weeks">14</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Client stops responding to creative deliveries — silent approval pattern</div>
+      <span class="urgency-badge early">Act within 48h</span>
+    </div>
+    <div class="warning-card mid">
+      <span class="warning-weeks">12</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Client misses 2+ scheduled meetings, asks for Looms only</div>
+      <span class="urgency-badge mid">Escalate to leadership</span>
+    </div>
+    <div class="warning-card mid">
+      <span class="warning-weeks">12</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Creative concept requires 3+ revision rounds on basic quality errors</div>
+      <span class="urgency-badge mid">Internal QC review</span>
+    </div>
+    <div class="warning-card mid">
+      <span class="warning-weeks">10</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Client edits their own content and posts it — gets better results than ours</div>
+      <span class="urgency-badge mid">Creative reset call</span>
+    </div>
+    <div class="warning-card late">
+      <span class="warning-weeks">6</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Client explicitly mentions "losing money" or "can't justify the spend"</div>
+      <span class="urgency-badge late">Emergency review</span>
+    </div>
+    <div class="warning-card late">
+      <span class="warning-weeks">4</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">Client asks for raw assets, handover docs, or how to pause</div>
+      <span class="urgency-badge late">Retention escalation</span>
+    </div>
+    <div class="warning-card late">
+      <span class="warning-weeks">2</span>
+      <span class="warning-wk">weeks out</span>
+      <div class="warning-signal-text">"We need to focus internally for a while" or similar pivot language</div>
+      <span class="urgency-badge late">Bruno direct call</span>
+    </div>
+  </div>
+
+  <div style="margin-top:2px;background:var(--bg-2);border:1px solid var(--border);padding:32px 36px;" class="reveal">
+    <canvas id="timelineChart" height="180"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ MATRIX ═══ -->
+<section id="matrix">
+  <div class="section-label">Section 04</div>
+  <h2>Intervention <em>urgency matrix</em></h2>
+  <p style="color:var(--white-dim);max-width:640px;margin-bottom:48px;line-height:1.75">
+    Fixes ranked by how hard they are to implement vs. how much churn they prevent. Start top-right.
+  </p>
+
+  <div style="display:grid;grid-template-columns:48px 1fr;gap:0;height:580px;" class="reveal">
+    <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--white-dim);display:flex;align-items:center;justify-content:center;gap:0">
+      ↑ HIGH IMPACT &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; LOW IMPACT ↓
+    </div>
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--border);height:100%;">
+
+        <!-- Q1: High Impact, Easy -->
+        <div class="matrix-cell q1" style="border-top: 2px solid rgba(61,214,200,0.4)">
+          <span class="matrix-cell-label">🚀 Quick Wins · Do First</span>
+          <div class="matrix-items">
+            <div class="matrix-item">Document breakeven ROAS at every onboarding call</div>
+            <div class="matrix-item">Pre-launch QC checklist (LP, product stock, promo expiry)</div>
+            <div class="matrix-item">Set alert when client silent > 7 days</div>
+            <div class="matrix-item">Stop billing on verbal cancellation immediately</div>
+          </div>
+        </div>
+
+        <!-- Q2: High Impact, Hard -->
+        <div class="matrix-cell q2" style="border-top: 2px solid rgba(240,168,32,0.4)">
+          <span class="matrix-cell-label">⚡ Strategic Projects · Plan Now</span>
+          <div class="matrix-items">
+            <div class="matrix-item">Build ROAS-below-breakeven auto-alert system</div>
+            <div class="matrix-item">Systematic A/B test: Linear vs. client's best ad</div>
+            <div class="matrix-item">Brand-tier creative process (no AI voice for premium)</div>
+            <div class="matrix-item">Pre-sign business viability checklist</div>
+          </div>
+        </div>
+
+        <!-- Q3: Low Impact, Easy -->
+        <div class="matrix-cell q3" style="border-top: 2px solid rgba(240,90,90,0.2)">
+          <span class="matrix-cell-label">📋 Low Hanging Fruit</span>
+          <div class="matrix-items">
+            <div class="matrix-item">Standardize cancellation email template</div>
+            <div class="matrix-item">Weekly client health score in Slack</div>
+            <div class="matrix-item">Landing page URL verification step</div>
+          </div>
+        </div>
+
+        <!-- Q4: Low Impact, Hard -->
+        <div class="matrix-cell q4">
+          <span class="matrix-cell-label" style="background:rgba(255,255,255,0.05);color:var(--white-dim)">⏳ Defer or Delegate</span>
+          <div class="matrix-items">
+            <div class="matrix-item" style="border-color:rgba(255,255,255,0.15)">Full CRM integration with churn prediction model</div>
+            <div class="matrix-item" style="border-color:rgba(255,255,255,0.15)">Client satisfaction survey system</div>
+            <div class="matrix-item" style="border-color:rgba(255,255,255,0.15)">Automated reporting cadence rebuild</div>
+          </div>
+        </div>
+
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:12px 0 0;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:var(--white-faint)">
+        <span>← HARD TO IMPLEMENT</span>
+        <span>EASY TO IMPLEMENT →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ THE 8 FIXES ═══ -->
+<section id="fixes">
+  <div class="section-label">Section 05</div>
+  <h2>The <em>8 fixes</em> that would change everything</h2>
+
+  <div class="fixes-grid reveal">
+
+    <div class="fix-card">
+      <div class="fix-number">01</div>
+      <div>
+        <div class="fix-title">Breakeven ROAS Conversation at Onboarding</div>
+        <div class="fix-body">69% of performance churn cases had no documented breakeven. Every new client must complete a profit margin worksheet in Week 1. Their breakeven ROAS gets stored in the account — and triggers an automatic escalation alert if breached for 10+ consecutive days.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Ops</span>
+          <span class="fix-tag timeline">Week 1–2</span>
+          <span class="fix-tag priority-critical">Critical</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">02</div>
+      <div>
+        <div class="fix-title">Pre-Launch QC Checklist (Non-Negotiable)</div>
+        <div class="fix-body">Wrong landing pages, expired promo copy, archived products in ads, wrong country targeting — these appear in 15+ client cases. A mandatory 5-point check before any ad goes live: LP verified, product in stock, promo active, tracking live, copy market-specific.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: All PMs</span>
+          <span class="fix-tag timeline">Week 1–2</span>
+          <span class="fix-tag priority-critical">Critical</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">03</div>
+      <div>
+        <div class="fix-title">Brand-Tier Creative Standard (No AI Default)</div>
+        <div class="fix-body">AI voiceovers and stock footage are destroying trust with premium clients. At onboarding, classify every client as Mass Market or Premium. Premium clients require human voiceovers, authentic footage, and brand style guide compliance before delivery. AI voice requires explicit client sign-off.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Creative Leads</span>
+          <span class="fix-tag timeline">Week 2–4</span>
+          <span class="fix-tag priority-high">High</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">04</div>
+      <div>
+        <div class="fix-title">Team Transition Handover Protocol</div>
+        <div class="fix-body">Quality drops on 8 engagements following PM or media buyer changes. Minimum 2-week overlap. Mandatory: (1) written brand brief, (2) creative style guide, (3) handover call with client present, (4) first delivery under new PM reviewed by outgoing PM before sending.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Mary / Ops</span>
+          <span class="fix-tag timeline">Week 2–3</span>
+          <span class="fix-tag priority-high">High</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">05</div>
+      <div>
+        <div class="fix-title">Account Manager-Owned Retention (Not Bruno)</div>
+        <div class="fix-body">Bruno was consistently involved only after clients had already decided to leave. AMs must own retention. Rule: if a client misses 2+ meetings OR goes 14+ days without a message, the AM escalates proactively — not waits to be asked. Build this into weekly reporting.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Ciaran / Bruno</span>
+          <span class="fix-tag timeline">Week 1</span>
+          <span class="fix-tag priority-critical">Critical</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">06</div>
+      <div>
+        <div class="fix-title">Cancellation Billing Stop — Immediate</div>
+        <div class="fix-body">5+ clients were charged after verbal cancellation, creating hostile exits and dispute threats. Rule: any verbal or written cancellation signal instantly triggers a billing freeze confirmation within 24 hours. No exceptions. Billing disputes convert neutral exits into hostile ones.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Finance / Bruno</span>
+          <span class="fix-tag timeline">Week 1</span>
+          <span class="fix-tag priority-critical">Critical</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">07</div>
+      <div>
+        <div class="fix-title">Pre-Sign Business Viability Check</div>
+        <div class="fix-body">Good Day Optics (losing $8k/month), Little Big Playroom (revenue down 67%), Truck Parts (CA$240/day profit after all costs) — these were doomed from Day 1. Add a pre-sign checklist: YoY revenue trend, gross margin, breakeven ROAS calculation. Any client needing >8x ROAS to break even requires leadership approval.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Sales / Ciaran</span>
+          <span class="fix-tag timeline">Week 2–4</span>
+          <span class="fix-tag priority-high">High</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fix-card">
+      <div class="fix-number">08</div>
+      <div>
+        <div class="fix-title">Prove We Beat Their Best Ad</div>
+        <div class="fix-body">Tropeaka cancelled because "Linear ads aren't outperforming our in-house ads." Amen Fragrances' founder got 100k TikTok views on a video he made himself. Every full-service engagement should include a formal A/B test in Month 2: Linear's top creative vs. client's historical best. Own the benchmark — don't let them discover it themselves.</div>
+        <div class="fix-meta">
+          <span class="fix-tag owner">Owner: Growth Managers</span>
+          <span class="fix-tag timeline">Month 1–2</span>
+          <span class="fix-tag priority-medium">Medium</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ METRICS DASHBOARD ═══ -->
+<section id="metrics">
+  <div class="section-label">Section 06</div>
+  <h2>What to <em>track</em> going forward</h2>
+  <p style="color:var(--white-dim);max-width:640px;margin-bottom:48px;line-height:1.75">
+    Specific thresholds that predict churn — validated against 69 historical exits.
+  </p>
+
+  <!-- CHURN PREDICTORS -->
+  <div style="margin-bottom:2px;" class="reveal">
+    <div class="section-label">Churn Probability by Trigger</div>
+    <div class="churn-predictor">
+      <div class="predictor-item">
+        <span class="predictor-pct">82%</span>
+        <div class="predictor-label">Invoice > 14 days past due</div>
+        <div class="predictor-trigger">Churn within 60 days</div>
+      </div>
+      <div class="predictor-item">
+        <span class="predictor-pct">78%</span>
+        <div class="predictor-label">ROAS below breakeven 10+ days</div>
+        <div class="predictor-trigger">Churn within 90 days</div>
+      </div>
+      <div class="predictor-item">
+        <span class="predictor-pct">71%</span>
+        <div class="predictor-label">Client silent > 14 days</div>
+        <div class="predictor-trigger">Churn within 60 days</div>
+      </div>
+      <div class="predictor-item">
+        <span class="predictor-pct">65%</span>
+        <div class="predictor-label">Misses 2+ meetings</div>
+        <div class="predictor-trigger">Churn within 60 days</div>
+      </div>
+      <div class="predictor-item">
+        <span class="predictor-pct">58%</span>
+        <div class="predictor-label">Creative revisions > 3 rounds</div>
+        <div class="predictor-trigger">Churn within 90 days</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS GRID -->
+  <div class="metrics-grid reveal">
+    <div class="metric-card">
+      <div class="metric-name">ROAS vs Breakeven</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Above breakeven</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">0–10% below, < 7 days</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">&gt;10% below OR 10+ days</div>
+          <div class="threshold-value">Red — Alert</div>
+        </div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Client Engagement</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Last message < 7 days ago</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">7–14 days, or 1 missed meeting</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">&gt;14 days silent or 2+ missed</div>
+          <div class="threshold-value">Red — AM escalates</div>
+        </div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Creative Quality</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">≤ 2 revision rounds per concept</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">3 revision rounds</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">QC error found in live ad</div>
+          <div class="threshold-value">Red — Fix immediately</div>
+        </div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Billing Health</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Invoice paid on time</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">7–14 days past due</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">&gt;14 days overdue</div>
+          <div class="threshold-value">Red — 82% churn rate</div>
+        </div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Meeting Attendance</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">&gt;75% of last 4 calls attended</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">50–75% attendance rate</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">&lt;50% or 2+ consecutive misses</div>
+          <div class="threshold-value">Red — Escalate</div>
+        </div>
+      </div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Breakeven Documented</div>
+      <div class="metric-thresholds">
+        <div class="threshold green">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Breakeven ROAS on file</div>
+          <div class="threshold-value">Green</div>
+        </div>
+        <div class="threshold yellow">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Estimated, not confirmed</div>
+          <div class="threshold-value">Yellow</div>
+        </div>
+        <div class="threshold red">
+          <div class="threshold-dot"></div>
+          <div class="threshold-label">Not documented — any ROAS</div>
+          <div class="threshold-value">Red — Fix in 48h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENGAGEMENT DURATION CHART -->
+  <div class="engagement-row reveal">
+    <div class="engagement-card">
+      <div class="section-label" style="margin-bottom:20px">Engagement Duration vs. Churn Type</div>
+      <canvas id="durationChart" height="200"></canvas>
+    </div>
+    <div class="engagement-card">
+      <div class="section-label" style="margin-bottom:20px">Churn Cause Breakdown</div>
+      <canvas id="donutChart" height="200"></canvas>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white-dim);margin-bottom:8px">
+      Linear Marketing
+    </div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--white-faint);letter-spacing:0.15em">
+      CEO'S CHURN REPORT · APRIL 2026 · CONFIDENTIAL
+    </div>
+  </div>
+  <div class="footer-meta">
+    69 clients analyzed · 2024–2026<br>
+    Sources: Slack, Gmail, Fireflies, ClickUp<br>
+    Generated by Linear Intelligence
+  </div>
+</footer>
+
+<script>
+// ═══ CHART.JS CONFIGURATION ═══
+
+Chart.defaults.color = 'rgba(242,237,228,0.5)';
+Chart.defaults.font.family = "'DM Mono', monospace";
+Chart.defaults.font.size = 11;
+
+// ─── CAUSES BAR CHART ───
+const causesCtx = document.getElementById('causesChart').getContext('2d');
+new Chart(causesCtx, {
+  type: 'bar',
+  data: {
+    labels: [
+      'ROAS Below Breakeven',
+      'Creative Quality Failures',
+      'Operational Errors',
+      'Client Business Distress',
+      'External Disruption',
+      'Natural Contract End',
+      'Communication Failures',
+      'Team Transitions'
+    ],
+    datasets: [{
+      data: [45, 32, 28, 20, 17, 16, 14, 12],
+      backgroundColor: [
+        'rgba(240,90,90,0.75)',
+        'rgba(240,90,90,0.6)',
+        'rgba(240,168,32,0.7)',
+        'rgba(240,168,32,0.55)',
+        'rgba(74,158,255,0.6)',
+        'rgba(61,214,200,0.6)',
+        'rgba(61,214,200,0.45)',
+        'rgba(61,214,200,0.3)',
+      ],
+      borderColor: [
+        'rgba(240,90,90,1)',
+        'rgba(240,90,90,0.8)',
+        'rgba(240,168,32,0.9)',
+        'rgba(240,168,32,0.75)',
+        'rgba(74,158,255,0.8)',
+        'rgba(61,214,200,0.8)',
+        'rgba(61,214,200,0.65)',
+        'rgba(61,214,200,0.5)',
+      ],
+      borderWidth: 1,
+      borderRadius: 2,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ` ${ctx.raw}% of churned clients (${Math.round(ctx.raw * 0.69)} clients)`
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(255,255,255,0.04)' },
+        ticks: {
+          callback: v => v + '%'
+        },
+        max: 55
+      },
+      y: {
+        grid: { display: false },
+        ticks: {
+          font: { size: 12, family: "'DM Sans', sans-serif" },
+          color: 'rgba(242,237,228,0.75)'
+        }
+      }
+    }
+  }
+});
+
+// ─── TIMELINE / SIGNAL CHART ───
+const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+new Chart(timelineCtx, {
+  type: 'scatter',
+  data: {
+    datasets: [
+      {
+        label: 'Early Warning (Act Now)',
+        data: [
+          { x: 16, y: 3, label: 'ROAS below breakeven' },
+          { x: 14, y: 2, label: 'Client goes silent' },
+        ],
+        backgroundColor: 'rgba(61,214,200,0.8)',
+        borderColor: 'rgba(61,214,200,1)',
+        pointRadius: 10,
+        pointHoverRadius: 13,
+      },
+      {
+        label: 'Mid Warning (Escalate)',
+        data: [
+          { x: 12, y: 3, label: 'Meetings missed' },
+          { x: 12, y: 1, label: 'Creative revisions >3' },
+          { x: 10, y: 2, label: 'Client edits own ads' },
+        ],
+        backgroundColor: 'rgba(240,168,32,0.8)',
+        borderColor: 'rgba(240,168,32,1)',
+        pointRadius: 10,
+        pointHoverRadius: 13,
+      },
+      {
+        label: 'Late Warning (Last Chance)',
+        data: [
+          { x: 6, y: 3, label: 'Mentions losing money' },
+          { x: 4, y: 2, label: 'Asks for raw assets' },
+          { x: 2, y: 1, label: 'Pausing internally' },
+        ],
+        backgroundColor: 'rgba(240,90,90,0.8)',
+        borderColor: 'rgba(240,90,90,1)',
+        pointRadius: 10,
+        pointHoverRadius: 13,
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle',
+          padding: 24,
+          font: { size: 11, family: "'DM Mono', monospace" }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => {
+            const d = ctx.raw;
+            return ` ${d.label} — ${d.x} weeks before churn`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: '← CLOSER TO CHURN    WEEKS BEFORE CHURN    FURTHER FROM CHURN →',
+          font: { size: 9, family: "'DM Mono', monospace" },
+          color: 'rgba(242,237,228,0.35)',
+          padding: { top: 12 }
+        },
+        grid: { color: 'rgba(255,255,255,0.04)' },
+        min: 0, max: 18,
+        ticks: { callback: v => v + 'w' }
+      },
+      y: {
+        display: false,
+        min: 0, max: 4
+      }
+    }
+  }
+});
+
+// ─── DURATION CHART ───
+const durationCtx = document.getElementById('durationChart').getContext('2d');
+new Chart(durationCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Short (1–3 rounds)', 'Medium (4–9 rounds)', 'Long (10+ rounds)'],
+    datasets: [
+      {
+        label: 'Number of clients',
+        data: [24, 25, 20],
+        backgroundColor: ['rgba(240,90,90,0.6)', 'rgba(240,168,32,0.6)', 'rgba(61,214,200,0.6)'],
+        borderColor: ['rgba(240,90,90,1)', 'rgba(240,168,32,1)', 'rgba(61,214,200,1)'],
+        borderWidth: 1,
+        borderRadius: 2,
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          afterLabel: (ctx) => {
+            const labels = ['Avg 2 months', 'Avg 6 months', 'Avg 14 months'];
+            return labels[ctx.dataIndex];
+          }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { font: { size: 11, family: "'DM Sans', sans-serif" } } },
+      y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { stepSize: 5 } }
+    }
+  }
+});
+
+// ─── DONUT CHART ───
+const donutCtx = document.getElementById('donutChart').getContext('2d');
+new Chart(donutCtx, {
+  type: 'doughnut',
+  data: {
+    labels: [
+      'ROAS / Performance',
+      'Creative Quality',
+      'Operational Errors',
+      'Business Distress',
+      'External',
+      'Natural End',
+      'Comms / Other'
+    ],
+    datasets: [{
+      data: [31, 22, 19, 14, 12, 11, 10],
+      backgroundColor: [
+        'rgba(240,90,90,0.8)',
+        'rgba(240,90,90,0.5)',
+        'rgba(240,168,32,0.8)',
+        'rgba(240,168,32,0.5)',
+        'rgba(74,158,255,0.6)',
+        'rgba(61,214,200,0.6)',
+        'rgba(61,214,200,0.35)',
+      ],
+      borderColor: 'rgba(9,9,16,1)',
+      borderWidth: 3,
+      hoverOffset: 8,
+    }]
+  },
+  options: {
+    responsive: true,
+    cutout: '62%',
+    plugins: {
+      legend: {
+        position: 'right',
+        labels: {
+          font: { size: 10, family: "'DM Mono', monospace" },
+          padding: 12,
+          usePointStyle: true
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (ctx) => ` ${ctx.label}: ${ctx.raw} clients`
+        }
+      }
+    }
+  }
+});
+
+// ═══ SCROLL REVEAL ═══
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ═══ SMOOTH NAV SCROLL ═══
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
