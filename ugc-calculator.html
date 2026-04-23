@@ -64,7 +64,7 @@
                 <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
                     <div class="flex justify-between items-center mb-4">
                         <label class="font-bold text-white">Premium Videos</label>
-                        <span class="text-xs text-brand-muted">($225/video)</span>
+                        <span class="text-xs text-brand-muted">($225/concept)</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('premium', -1)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
@@ -77,12 +77,25 @@
                 <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
                     <div class="flex justify-between items-center mb-4">
                         <label class="font-bold text-white">Standard Videos</label>
-                        <span class="text-xs text-brand-muted">($200/3 videos)</span>
+                        <span class="text-xs text-brand-muted">($200/3 concepts)</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('standard', -3)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                         <input type="number" id="standard-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
                         <button onclick="updateCount('standard', 3)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <!-- Hook Variations -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="font-bold text-white">Hook Variations</label>
+                        <span class="text-xs text-brand-muted">($20/variation per concept)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('variation', -1)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="variation-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('variation', 1)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
 
@@ -108,8 +121,16 @@
                     <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Package Summary</h3>
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
+                            <span class="text-gray-400">Concepts:</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-concepts">0</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
+                            <span class="text-gray-400">Variations per Concept:</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-variations">0</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
                             <span class="text-gray-400">Total Videos:</span>
-                            <span class="text-white font-mono font-bold text-lg" id="summary-angles">0</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-total-videos">0</span>
                         </div>
                         <div class="flex justify-between border-b border-white/5 pb-2 mb-2">
                             <span class="text-gray-400"># of Creators:</span>
@@ -133,6 +154,10 @@
                         <div class="flex justify-between">
                             <span class="text-gray-400">Standard Production Cost:</span>
                             <span class="text-white font-mono" id="cogs-standard">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Hook Variations Cost:</span>
+                            <span class="text-white font-mono" id="cogs-variations">$0.00</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-400">Static Production Cost:</span>
@@ -227,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div class="grid md:grid-cols-3 gap-6">
+                    <div class="grid md:grid-cols-2 gap-6">
                         <!-- Reverse Premium -->
                         <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
                             <label class="block text-xs font-bold text-gray-400 mb-3">Premium Videos</label>
@@ -248,6 +273,16 @@
                             </div>
                         </div>
 
+                        <!-- Reverse Hook Variations -->
+                        <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
+                            <label class="block text-xs font-bold text-gray-400 mb-3">Hook Variations</label>
+                            <div class="flex items-center justify-center gap-2">
+                                <button onclick="updateReverseCount('variation', -1)" class="w-8 h-8 rounded bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus text-xs"></i></button>
+                                <input type="number" id="rev-variation" class="w-12 bg-transparent text-center text-white font-mono focus:outline-none" value="0" readonly>
+                                <button onclick="updateReverseCount('variation', 1)" class="w-8 h-8 rounded bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus text-xs"></i></button>
+                            </div>
+                        </div>
+
                         <!-- Reverse Static -->
                         <div class="bg-brand-dark p-4 rounded-xl border border-white/5 text-center">
                             <label class="block text-xs font-bold text-gray-400 mb-3">Statics</label>
@@ -265,8 +300,16 @@
 
                     <div class="mb-6 border-b border-white/5 pb-4">
                         <div class="flex justify-between text-sm text-gray-400 mb-1">
+                            <span>Concepts:</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-concepts">0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mb-1">
+                            <span>Variations per Concept:</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-variations">0</span>
+                        </div>
+                        <div class="flex justify-between text-sm text-gray-400 mb-1">
                             <span>Total Videos:</span>
-                            <span class="text-white font-mono font-bold" id="rev-total-angles">0</span>
+                            <span class="text-white font-mono font-bold" id="rev-total-videos">0</span>
                         </div>
                         <div class="flex justify-between text-sm text-gray-400 mb-1">
                             <span># of Creators:</span>
@@ -293,7 +336,6 @@
                             <span class="text-sm font-bold text-white">Final Margin</span>
                             <span class="text-xl font-bold" id="rev-margin">0%</span>
                         </div>
-                        <!-- Progress Bar -->
                         <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
                             <div id="rev-margin-bar" class="bg-brand-success h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
                         </div>
@@ -312,6 +354,7 @@
         const COST_STANDARD_PER_CREATOR = 200.00; // 3 videos per creator
         const PREMIUM_VIDEOS_PER_CREATOR = 1;
         const STANDARD_VIDEOS_PER_CREATOR = 3;
+        const COST_VARIATION = 20.00;             // per variation video ($20 × concepts × variations)
         const COST_STATIC = 8.00;
 
         // TARGET MARGIN
@@ -320,6 +363,7 @@
         let counts = {
             premium: 0,
             standard: 0,
+            variation: 0,
             static: 0
         };
 
@@ -334,13 +378,15 @@
         }
 
         function calculate() {
-            const totalVideos = counts.premium + counts.standard;
+            const totalConcepts = counts.premium + counts.standard;
+            const totalVideos = totalConcepts * (1 + counts.variation);
             const totalCreators = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) + (counts.standard / STANDARD_VIDEOS_PER_CREATOR);
 
             const cogsPremium = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) * COST_PREMIUM_PER_CREATOR;
             const cogsStandard = (counts.standard / STANDARD_VIDEOS_PER_CREATOR) * COST_STANDARD_PER_CREATOR;
+            const cogsVariations = totalConcepts * counts.variation * COST_VARIATION;
             const cogsStatic = counts.static * COST_STATIC;
-            const totalCOGS = cogsPremium + cogsStandard + cogsStatic;
+            const totalCOGS = cogsPremium + cogsStandard + cogsVariations + cogsStatic;
 
             const minSellPrice = totalCOGS > 0 ? (totalCOGS / (1 - TARGET_MARGIN)) : 0;
 
@@ -379,12 +425,15 @@
             const grossProfit = finalPrice - totalCOGS;
             const actualMargin = finalPrice > 0 ? (grossProfit / finalPrice) * 100 : 0;
 
-            document.getElementById('summary-angles').innerText = totalVideos;
+            document.getElementById('summary-concepts').innerText = totalConcepts;
+            document.getElementById('summary-variations').innerText = counts.variation;
+            document.getElementById('summary-total-videos').innerText = totalVideos;
             document.getElementById('summary-creators').innerText = totalCreators;
             document.getElementById('summary-statics').innerText = counts.static;
 
             document.getElementById('cogs-premium').innerText = formatMoney(cogsPremium);
             document.getElementById('cogs-standard').innerText = formatMoney(cogsStandard);
+            document.getElementById('cogs-variations').innerText = formatMoney(cogsVariations);
             document.getElementById('cogs-static').innerText = formatMoney(cogsStatic);
             document.getElementById('cogs-total').innerText = formatMoney(totalCOGS);
 
@@ -416,6 +465,7 @@
         let revCounts = {
             premium: 0,
             standard: 0,
+            variation: 0,
             static: 0
         };
 
@@ -431,20 +481,26 @@
             const price = parseFloat(document.getElementById('proposal-price').value) || 0;
             const pVideos = revCounts.premium;
             const sVideos = revCounts.standard;
+            const variations = revCounts.variation;
             const statics = revCounts.static;
 
+            const totalConcepts = pVideos + sVideos;
+            const totalVideos = totalConcepts * (1 + variations);
             const pCreators = pVideos / PREMIUM_VIDEOS_PER_CREATOR;
             const sCreators = sVideos / STANDARD_VIDEOS_PER_CREATOR;
             const totalCreators = pCreators + sCreators;
 
-            const cogs = (pCreators * COST_PREMIUM_PER_CREATOR) + (sCreators * COST_STANDARD_PER_CREATOR) + (statics * COST_STATIC);
+            const cogs = (pCreators * COST_PREMIUM_PER_CREATOR)
+                       + (sCreators * COST_STANDARD_PER_CREATOR)
+                       + (totalConcepts * variations * COST_VARIATION)
+                       + (statics * COST_STATIC);
             const profit = price - cogs;
             const margin = price > 0 ? (profit / price) * 100 : 0;
 
-            const totalVideos = pVideos + sVideos;
-
             document.getElementById('rev-cogs').innerText = formatMoney(cogs);
-            document.getElementById('rev-total-angles').innerText = totalVideos;
+            document.getElementById('rev-total-concepts').innerText = totalConcepts;
+            document.getElementById('rev-total-variations').innerText = variations;
+            document.getElementById('rev-total-videos').innerText = totalVideos;
             document.getElementById('rev-total-creators').innerText = totalCreators;
             document.getElementById('rev-total-statics').innerText = statics;
 
