@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear Culture Index</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #4F46E5;
+      --accent-hover: #4338CA;
+      --accent-light: #EEF2FF;
+      --text: #0F172A;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --bg: #FAFAFA;
+      --white: #FFFFFF;
+      --chip-bg: #F1F5F9;
+      --green: #059669;
+      --red: #DC2626;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .screen { display: none; min-height: 100vh; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1.5px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-ghost:hover { background: var(--chip-bg); color: var(--text); }
+
+    /* ── INTRO ── */
+    #intro {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      background: radial-gradient(ellipse 80% 50% at 50% -5%, #E0E7FF 0%, transparent 65%), var(--bg);
+    }
+
+    .intro-badge {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .intro-title {
+      font-size: clamp(36px, 7vw, 68px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      margin-bottom: 20px;
+      max-width: 580px;
+    }
+
+    .intro-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.65;
+      margin-bottom: 44px;
+    }
+
+    /* ── QUIZ ── */
+    #quiz {
+      padding: 56px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .quiz-header { margin-bottom: 36px; }
+
+    .quiz-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .quiz-hint { color: var(--muted); font-size: 15px; }
+
+    .word-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+
+    .chip {
+      background: var(--chip-bg);
+      border: 2px solid transparent;
+      color: #334155;
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.12s;
+      user-select: none;
+    }
+    .chip:hover { border-color: #A5B4FC; background: #EEF2FF; color: var(--accent); }
+    .chip.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .quiz-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .count-label { font-size: 14px; color: var(--muted); }
+    .count-label strong { color: var(--text); }
+
+    /* ── RESULTS ── */
+    #results {
+      padding: 56px 24px;
+      max-width: 720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .result-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .result-name {
+      font-size: clamp(38px, 8vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      margin-bottom: 14px;
+    }
+
+    .result-tagline {
+      font-size: 18px;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .result-desc {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #334155;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .result-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .result-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+
+    .card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .result-card.thrive .card-label { color: var(--green); }
+    .result-card.challenge .card-label { color: var(--red); }
+    .card-text { font-size: 13.5px; line-height: 1.65; color: #475569; }
+
+    .dimensions {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+    }
+
+    .dim-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .dim-row { margin-bottom: 22px; }
+    .dim-row:last-child { margin-bottom: 0; }
+
+    .dim-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .dim-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #94A3B8;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .dim-track {
+      height: 6px;
+      background: #E2E8F0;
+      border-radius: 100px;
+      position: relative;
+    }
+
+    .dim-dot {
+      position: absolute;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border: 3px solid #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    .result-footer { display: flex; justify-content: center; }
+
+    @media (max-width: 560px) {
+      .result-cards { grid-template-columns: 1fr; }
+      .quiz-footer { flex-direction: column; align-items: flex-start; }
+      #quiz, #results { padding: 36px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro" class="screen active">
+  <span class="intro-badge">Linear Culture Index</span>
+  <h1 class="intro-title">Find out how you're wired.</h1>
+  <p class="intro-sub">Select every word that feels genuinely like you. No right answers — just honest ones.</p>
+  <button class="btn-primary" onclick="startQuiz()">Start the assessment</button>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz" class="screen">
+  <div class="quiz-header">
+    <h2 class="quiz-title">Which words describe you?</h2>
+    <p class="quiz-hint">Pick as many as feel true. Don't overthink it.</p>
+  </div>
+  <div class="word-grid" id="wordGrid"></div>
+  <div class="quiz-footer">
+    <p class="count-label"><strong id="countNum">0</strong> words selected</p>
+    <button class="btn-primary" id="seeResultBtn" onclick="showResult()" disabled>See my result →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results" class="screen">
+  <p class="result-eyebrow">Your profile</p>
+  <h1 class="result-name" id="resultName"></h1>
+  <p class="result-tagline" id="resultTagline"></p>
+  <div class="result-desc" id="resultDesc"></div>
+  <div class="result-cards">
+    <div class="result-card thrive">
+      <p class="card-label">You thrive when</p>
+      <p class="card-text" id="resultThrive"></p>
+    </div>
+    <div class="result-card challenge">
+      <p class="card-label">Watch out for</p>
+      <p class="card-text" id="resultChallenge"></p>
+    </div>
+  </div>
+  <div class="dimensions">
+    <p class="dim-heading">Your dimensions</p>
+    <div id="dimContainer"></div>
+  </div>
+  <div class="result-footer">
+    <button class="btn-ghost" onclick="retake()">Retake the assessment</button>
+  </div>
+</div>
+
+<script>
+const WORDS = [
+  // Drive: +D = ambitious/competitive, -D = team-first/humble
+  { text: "Competitive",    dim: "D", dir:  1 },
+  { text: "Driven",         dim: "D", dir:  1 },
+  { text: "Ambitious",      dim: "D", dir:  1 },
+  { text: "Bold",           dim: "D", dir:  1 },
+  { text: "Decisive",       dim: "D", dir:  1 },
+  { text: "Assertive",      dim: "D", dir:  1 },
+  { text: "Determined",     dim: "D", dir:  1 },
+  { text: "Confident",      dim: "D", dir:  1 },
+  { text: "Supportive",     dim: "D", dir: -1 },
+  { text: "Loyal",          dim: "D", dir: -1 },
+  { text: "Cooperative",    dim: "D", dir: -1 },
+  { text: "Humble",         dim: "D", dir: -1 },
+
+  // Social: +S = outgoing/people-focused, -S = independent/reserved
+  { text: "Warm",           dim: "S", dir:  1 },
+  { text: "Outgoing",       dim: "S", dir:  1 },
+  { text: "Enthusiastic",   dim: "S", dir:  1 },
+  { text: "Collaborative",  dim: "S", dir:  1 },
+  { text: "Sociable",       dim: "S", dir:  1 },
+  { text: "Talkative",      dim: "S", dir:  1 },
+  { text: "Friendly",       dim: "S", dir:  1 },
+  { text: "Engaging",       dim: "S", dir:  1 },
+  { text: "Reserved",       dim: "S", dir: -1 },
+  { text: "Private",        dim: "S", dir: -1 },
+  { text: "Self-reliant",   dim: "S", dir: -1 },
+  { text: "Selective",      dim: "S", dir: -1 },
+  { text: "Quiet",          dim: "S", dir: -1 },
+
+  // Pace: +P = fast/urgent, -P = steady/deliberate
+  { text: "Urgent",         dim: "P", dir:  1 },
+  { text: "Fast-paced",     dim: "P", dir:  1 },
+  { text: "Spontaneous",    dim: "P", dir:  1 },
+  { text: "Energetic",      dim: "P", dir:  1 },
+  { text: "Restless",       dim: "P", dir:  1 },
+  { text: "Dynamic",        dim: "P", dir:  1 },
+  { text: "Quick",          dim: "P", dir:  1 },
+  { text: "Patient",        dim: "P", dir: -1 },
+  { text: "Steady",         dim: "P", dir: -1 },
+  { text: "Consistent",     dim: "P", dir: -1 },
+  { text: "Deliberate",     dim: "P", dir: -1 },
+  { text: "Methodical",     dim: "P", dir: -1 },
+  { text: "Thoughtful",     dim: "P", dir: -1 },
+
+  // Structure: +C = precise/organized, -C = flexible/open
+  { text: "Precise",        dim: "C", dir:  1 },
+  { text: "Thorough",       dim: "C", dir:  1 },
+  { text: "Organized",      dim: "C", dir:  1 },
+  { text: "Careful",        dim: "C", dir:  1 },
+  { text: "Systematic",     dim: "C", dir:  1 },
+  { text: "Diligent",       dim: "C", dir:  1 },
+  { text: "Detail-oriented",dim: "C", dir:  1 },
+  { text: "Flexible",       dim: "C", dir: -1 },
+  { text: "Adaptable",      dim: "C", dir: -1 },
+  { text: "Creative",       dim: "C", dir: -1 },
+  { text: "Open-minded",    dim: "C", dir: -1 },
+  { text: "Easygoing",      dim: "C", dir: -1 },
+];
+
+const A = {
+  commander:   { name: "The Commander",   tagline: "You don't just lead — you shape the room.",                  desc: "A rare combination: ambitious, people-smart, fast-moving, and disciplined. You set the vision, rally the team, and hold the standard. Others look to you when the stakes are highest — and you rarely disappoint.",                                                     thrive: "High-ownership leadership with a strong team, a clear mandate, and big goals ahead.",                                            challenge: "Slowing down enough to let others process and catch up without losing momentum." },
+  trailblazer: { name: "The Trailblazer", tagline: "First to leap, and somehow you always land.",                desc: "You move fast, bring people with you, and figure it out as you go. Rules feel like speed bumps. Your energy and confidence are contagious — and your instincts are usually right.",                                                                                   thrive: "New initiatives, fast-moving teams, and environments that reward improvisation over process.",                                   challenge: "Following through once the initial excitement fades — and not burning others out keeping pace." },
+  strategist:  { name: "The Strategist",  tagline: "You play the long game — and win it.",                       desc: "Ambitious and people-smart, but you take your time. You build carefully, think several steps ahead, and bring others along through trust — not pressure. Your plans work because you don't rush them.",                                                             thrive: "Complex, multi-stakeholder projects where patience and relationship-building are competitive advantages.",                       challenge: "Moving fast enough in environments that demand quick decisions and visible momentum." },
+  visionary:   { name: "The Visionary",   tagline: "You see what others haven't imagined yet.",                  desc: "Big ideas, natural charisma, and no attachment to convention. You inspire people with possibility and pull them toward futures they couldn't picture before. The details can wait — someone else can figure those out.",                                             thrive: "Creative strategy, pitching, leading through change, and building things that don't exist yet.",                                challenge: "Turning vision into execution — you need a strong operator beside you to build what you dream." },
+  executor:    { name: "The Executor",    tagline: "You get it done — precisely, and fast.",                     desc: "Relentlessly focused, self-directed, and exact. You don't need a committee — you need a clear objective. You deliver high-quality work quickly and hold yourself and others to a high standard.",                                                                    thrive: "High-stakes deliverables with clear deadlines where quality and speed both matter and you own the outcome.",                    challenge: "Collaborating without inadvertently taking over; patience with teammates who work at a different pace." },
+  driver:      { name: "The Driver",      tagline: "Fast, independent, unstoppable.",                            desc: "Pure forward momentum. You set your own course, move quickly, and don't wait for consensus. Flexible enough to pivot on the fly, driven enough to never stop pushing. You're at your best when no one slows you down.",                                             thrive: "Entrepreneurial environments, high-autonomy roles, and fast-growth contexts with real room to run.",                           challenge: "Burning bridges with people who need more communication, process, or buy-in along the way." },
+  architect:   { name: "The Architect",   tagline: "You build things that last.",                                desc: "Ambitious but measured, independent but meticulous. You don't rush — you design. Your work is precise, your thinking is deep, and your standards are non-negotiable. What you build holds up.",                                                                      thrive: "Complex problem-solving, technical depth, and projects with a long enough horizon to get things right.",                        challenge: "Perfectionism that delays delivery, and a tendency to work in isolation when collaboration would help." },
+  pioneer:     { name: "The Pioneer",     tagline: "You chart new territory — alone if necessary.",              desc: "Driven by your own vision, uninterested in convention, and comfortable going your own way at your own pace. You're not building for the room — you're building the thing no one else thought to build.",                                                           thrive: "Independent roles, entrepreneurship, and turning unconventional ideas into something real.",                                    challenge: "Operating within teams or systems that feel restrictive — and communicating your direction clearly to others." },
+  motivator:   { name: "The Motivator",   tagline: "You lift the whole room.",                                   desc: "Energetic, organized, and people-first. You're the engine behind team morale — keeping everything moving, everyone aligned, and making sure no one gets left behind. You make hard things feel doable.",                                                           thrive: "Team environments, campaign coordination, and fast-moving operations with a strong human element.",                             challenge: "Overextending yourself to keep others happy — and forgetting to protect your own energy." },
+  catalyst:    { name: "The Catalyst",    tagline: "You spark things — and watch them burn bright.",             desc: "Social, energetic, and spontaneous. You connect people, generate momentum, and thrive in fluid environments where enthusiasm counts. You're the reason things get started — and the reason the room stays lit.",                                                    thrive: "Sales, community building, creative collaboration, and environments where energy and connection drive results.",                challenge: "Follow-through in structured environments — and sustaining independent focus for extended stretches." },
+  anchor:      { name: "The Anchor",      tagline: "Reliable, thorough, and always there.",                      desc: "The person the team quietly counts on. Steady, organized, and loyal — you make sure nothing slips through the cracks and nobody gets left behind. You do the invisible work that holds everything together.",                                                       thrive: "Operations, project management, and long-term client relationships where consistency and trust matter most.",                   challenge: "Making your contributions visible — the work you do is rarely noticed until it stops happening." },
+  nurturer:    { name: "The Nurturer",    tagline: "People open up around you naturally.",                       desc: "Warm, patient, and deeply empathetic. You create safety for others. Your flexibility and genuine care make you someone people trust instinctively — and you give a lot of yourself in the process.",                                                               thrive: "Client relations, team culture, coaching, HR, and any role where human trust is the foundation.",                               challenge: "Setting boundaries and advocating for yourself in environments that take more than they give." },
+  operator:    { name: "The Operator",    tagline: "Quiet, fast, and exact.",                                    desc: "You work independently, move efficiently, and care deeply about getting things right. No drama, no delays — just clean execution. Others may not see you coming, but they always recognize your results.",                                                           thrive: "Technical roles, independent execution, and high-throughput work where precision under pressure is the job.",                  challenge: "Communicating proactively and being perceived as approachable to teammates who need context." },
+  maverick:    { name: "The Maverick",    tagline: "You make your own rules — and make it work.",                desc: "Free-spirited and fast-moving, you follow your gut and rarely color inside the lines. You adapt quickly, find paths others wouldn't look for, and thrive in environments where agility beats process.",                                                            thrive: "Creative work, startups, unstructured environments, and roles where instinct and adaptability matter most.",                   challenge: "Consistency and accountability in environments that require sustained, structured output." },
+  analyst:     { name: "The Analyst",     tagline: "You know things others don't — because you actually check.", desc: "Careful, thorough, and quietly sharp. You prefer depth over speed and precision over polish. Your work holds up because you don't cut corners — and because you asked the question no one else thought to ask.",                                                  thrive: "Research, data, finance, quality assurance, and any domain where rigor and accuracy are what matter.",                         challenge: "Analysis paralysis — and translating depth of knowledge into clear communication or decisive action." },
+  independent: { name: "The Independent", tagline: "Self-directed, steady, and hard to pin down.",              desc: "You don't chase titles, trends, or external validation. Patient, adaptable, and self-sufficient — you work best when given space to find your own path. You're more complex than any single label captures.",                                                       thrive: "Autonomous or freelance roles, creative long-form work, and environments that genuinely reward self-management.",               challenge: "External structure and highly collaborative teams — you need space to do your best work." },
+};
+
+const DIMS = [
+  { key: "D", label: "Drive",         lo: "Collaborative", hi: "Ambitious",  min: -4, max: 8 },
+  { key: "S", label: "Social Energy", lo: "Independent",   hi: "Outgoing",   min: -5, max: 8 },
+  { key: "P", label: "Pace",          lo: "Measured",      hi: "Fast-paced", min: -6, max: 7 },
+  { key: "C", label: "Structure",     lo: "Flexible",      hi: "Precise",    min: -5, max: 7 },
+];
+
+function pickArchetype(D, S, P, C) {
+  const d = D > 0, s = S > 0, p = P > 0, c = C > 0;
+  if ( d &&  s &&  p &&  c) return A.commander;
+  if ( d &&  s &&  p && !c) return A.trailblazer;
+  if ( d &&  s && !p &&  c) return A.strategist;
+  if ( d &&  s && !p && !c) return A.visionary;
+  if ( d && !s &&  p &&  c) return A.executor;
+  if ( d && !s &&  p && !c) return A.driver;
+  if ( d && !s && !p &&  c) return A.architect;
+  if ( d && !s && !p && !c) return A.pioneer;
+  if (!d &&  s &&  p &&  c) return A.motivator;
+  if (!d &&  s &&  p && !c) return A.catalyst;
+  if (!d &&  s && !p &&  c) return A.anchor;
+  if (!d &&  s && !p && !c) return A.nurturer;
+  if (!d && !s &&  p &&  c) return A.operator;
+  if (!d && !s &&  p && !c) return A.maverick;
+  if (!d && !s && !p &&  c) return A.analyst;
+  return A.independent;
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let selected = new Set();
+let orderedWords = [];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0 });
+}
+
+function startQuiz() {
+  orderedWords = shuffle(WORDS);
+  selected.clear();
+  const grid = document.getElementById('wordGrid');
+  grid.innerHTML = '';
+  orderedWords.forEach((w, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'chip';
+    btn.textContent = w.text;
+    btn.onclick = () => {
+      if (selected.has(i)) { selected.delete(i); btn.classList.remove('selected'); }
+      else                  { selected.add(i);    btn.classList.add('selected'); }
+      document.getElementById('countNum').textContent = selected.size;
+      document.getElementById('seeResultBtn').disabled = selected.size < 3;
+    };
+    grid.appendChild(btn);
+  });
+  document.getElementById('countNum').textContent = 0;
+  document.getElementById('seeResultBtn').disabled = true;
+  showScreen('quiz');
+}
+
+function showResult() {
+  const scores = { D: 0, S: 0, P: 0, C: 0 };
+  selected.forEach(i => { const w = orderedWords[i]; scores[w.dim] += w.dir; });
+
+  const arch = pickArchetype(scores.D, scores.S, scores.P, scores.C);
+  document.getElementById('resultName').textContent    = arch.name;
+  document.getElementById('resultTagline').textContent = arch.tagline;
+  document.getElementById('resultDesc').textContent    = arch.desc;
+  document.getElementById('resultThrive').textContent  = arch.thrive;
+  document.getElementById('resultChallenge').textContent = arch.challenge;
+
+  const container = document.getElementById('dimContainer');
+  container.innerHTML = '';
+  DIMS.forEach(d => {
+    const pct = Math.round(((scores[d.key] - d.min) / (d.max - d.min)) * 100);
+    const row = document.createElement('div');
+    row.className = 'dim-row';
+    row.innerHTML = `
+      <p class="dim-name">${d.label}</p>
+      <div class="dim-ends"><span>${d.lo}</span><span>${d.hi}</span></div>
+      <div class="dim-track"><div class="dim-dot" style="left:${pct}%"></div></div>
+    `;
+    container.appendChild(row);
+  });
+
+  showScreen('results');
+}
+
+function retake() { showScreen('intro'); }
+</script>
+</body>
+</html>
