@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UGC Package Builder | Linear</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            card: '#0f0f0f',
+                            accent: '#5D5CDE',
+                            accentHover: '#4b4ac0',
+                            text: '#E5E7EB',
+                            muted: '#9CA3AF',
+                            success: '#10B981',
+                            warning: '#F59E0B',
+                            danger: '#EF4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-brand-text font-sans antialiased min-h-screen flex items-center justify-center p-6">
+
+    <div class="max-w-5xl w-full bg-brand-card border border-white/10 rounded-2xl p-8 shadow-2xl">
+
+        <div class="flex justify-between items-center mb-8 border-b border-white/10 pb-6">
+            <div>
+                <h1 class="text-3xl font-bold text-white uppercase">UGC Package Builder</h1>
+                <p class="text-gray-400 text-sm mt-1">Configure a package to see what's included and the production cost.</p>
+            </div>
+            <div class="px-4 py-2 bg-brand-accent/10 border border-brand-accent/20 rounded-lg text-brand-accent text-xs font-bold uppercase tracking-wider">
+                Team Use
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+
+            <!-- CONTROLS -->
+            <div class="space-y-8">
+
+                <!-- Premium Videos -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="font-bold text-white">Premium Videos</label>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">1 video per creator — high-production shoots</p>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('premium', -1)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="premium-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('premium', 1)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition shadow-lg shadow-white/5"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <!-- Standard Videos -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="font-bold text-white">Standard Videos</label>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">3 videos per creator — everyday UGC format</p>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('standard', -3)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="standard-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('standard', 3)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <!-- Hook Variations -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="font-bold text-white">Hook Variations</label>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">Additional hook cuts per concept for A/B testing</p>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('variation', -1)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="variation-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('variation', 1)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <!-- Statics -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="font-bold text-white">Statics</label>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">Static image ads (in increments of 5)</p>
+                    <div class="flex items-center gap-4">
+                        <button onclick="updateCount('static', -5)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
+                        <input type="number" id="static-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
+                        <button onclick="updateCount('static', 5)" class="w-12 h-12 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- RESULTS -->
+            <div class="space-y-6 flex flex-col justify-start">
+
+                <!-- Package Summary -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Package Summary</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-gray-400 flex items-center gap-2"><i class="fa-solid fa-layer-group text-xs text-brand-accent"></i> Concepts</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-concepts">0</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-gray-400 flex items-center gap-2"><i class="fa-solid fa-code-branch text-xs text-brand-accent"></i> Variations per Concept</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-variations">0</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-gray-400 flex items-center gap-2"><i class="fa-solid fa-video text-xs text-brand-accent"></i> Total Videos</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-total-videos">0</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-gray-400 flex items-center gap-2"><i class="fa-solid fa-user text-xs text-brand-accent"></i> Creators Needed</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-creators">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400 flex items-center gap-2"><i class="fa-solid fa-image text-xs text-brand-accent"></i> Total Statics</span>
+                            <span class="text-white font-mono font-bold text-lg" id="summary-statics">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COGS Breakdown -->
+                <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Production Cost</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Premium Videos</span>
+                            <span class="text-white font-mono" id="cogs-premium">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Standard Videos</span>
+                            <span class="text-white font-mono" id="cogs-standard">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Hook Variations</span>
+                            <span class="text-white font-mono" id="cogs-variations">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">Statics</span>
+                            <span class="text-white font-mono" id="cogs-static">$0.00</span>
+                        </div>
+                        <div class="border-t border-white/10 pt-3 mt-3 flex justify-between font-bold">
+                            <span class="text-white">Total Production Cost</span>
+                            <span class="text-brand-accent font-mono text-xl" id="cogs-total">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty state hint -->
+                <div id="empty-hint" class="text-center py-6 text-gray-600 text-sm">
+                    <i class="fa-solid fa-arrow-left mr-2"></i> Add items to build your package
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const COST_PREMIUM_PER_CREATOR = 225.00;
+        const COST_STANDARD_PER_CREATOR = 200.00;
+        const PREMIUM_VIDEOS_PER_CREATOR = 1;
+        const STANDARD_VIDEOS_PER_CREATOR = 3;
+        const COST_VARIATION = 20.00;
+        const COST_STATIC = 8.00;
+
+        let counts = { premium: 0, standard: 0, variation: 0, static: 0 };
+
+        function updateCount(type, change) {
+            const newVal = counts[type] + change;
+            if (newVal < 0) return;
+            counts[type] = newVal;
+            document.getElementById(`${type}-count`).value = counts[type];
+            calculate();
+        }
+
+        function calculate() {
+            const totalConcepts = counts.premium + counts.standard;
+            const totalVideos = totalConcepts * (1 + counts.variation);
+            const totalCreators = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) + (counts.standard / STANDARD_VIDEOS_PER_CREATOR);
+
+            const cogsPremium = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) * COST_PREMIUM_PER_CREATOR;
+            const cogsStandard = (counts.standard / STANDARD_VIDEOS_PER_CREATOR) * COST_STANDARD_PER_CREATOR;
+            const cogsVariations = totalConcepts * counts.variation * COST_VARIATION;
+            const cogsStatic = counts.static * COST_STATIC;
+            const totalCOGS = cogsPremium + cogsStandard + cogsVariations + cogsStatic;
+
+            document.getElementById('summary-concepts').innerText = totalConcepts;
+            document.getElementById('summary-variations').innerText = counts.variation;
+            document.getElementById('summary-total-videos').innerText = totalVideos;
+            document.getElementById('summary-creators').innerText = totalCreators;
+            document.getElementById('summary-statics').innerText = counts.static;
+
+            document.getElementById('cogs-premium').innerText = fmt(cogsPremium);
+            document.getElementById('cogs-standard').innerText = fmt(cogsStandard);
+            document.getElementById('cogs-variations').innerText = fmt(cogsVariations);
+            document.getElementById('cogs-static').innerText = fmt(cogsStatic);
+            document.getElementById('cogs-total').innerText = fmt(totalCOGS);
+
+            document.getElementById('empty-hint').style.display = totalCOGS > 0 ? 'none' : 'block';
+        }
+
+        function fmt(n) {
+            return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        calculate();
+    </script>
+
+</body>
+</html>
