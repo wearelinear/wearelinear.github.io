@@ -57,7 +57,7 @@
                 <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
                     <div class="flex justify-between items-center mb-1">
                         <label class="font-bold text-white">Premium Videos</label>
-                        <span class="text-xs text-brand-muted">($2,000/4 concepts)</span>
+                        <span class="text-xs text-brand-muted">($400/video)</span>
                     </div>
                     <p class="text-xs text-gray-500 mb-4">4 videos per creator — high-production shoots</p>
                     <div class="flex items-center gap-4">
@@ -71,9 +71,9 @@
                 <div class="bg-brand-dark p-6 rounded-xl border border-white/5">
                     <div class="flex justify-between items-center mb-1">
                         <label class="font-bold text-white">Standard Videos</label>
-                        <span class="text-xs text-brand-muted">($200/3 concepts)</span>
+                        <span class="text-xs text-brand-muted">($100/video &middot; $300/creator)</span>
                     </div>
-                    <p class="text-xs text-gray-500 mb-4">3 videos per creator — everyday UGC format</p>
+                    <p class="text-xs text-gray-500 mb-4">3 videos per creator — minimum campaign: 6 videos (2 creators &times; 3 scripts)</p>
                     <div class="flex items-center gap-4">
                         <button onclick="updateCount('standard', -3)" class="w-12 h-12 rounded-lg bg-white/5 hover:bg-white/10 text-white flex items-center justify-center transition border border-white/10"><i class="fa-solid fa-minus"></i></button>
                         <input type="number" id="standard-count" value="0" readonly class="flex-1 h-12 bg-transparent text-center text-white font-mono text-xl focus:outline-none border-b border-white/10">
@@ -190,7 +190,7 @@
                     </div>
                     <div class="mt-4 pt-4 border-t border-white/5 flex items-center gap-2 text-xs text-gray-500">
                         <i class="fa-solid fa-circle-info text-brand-accent/50"></i>
-                        Minimum package: $400
+                        Minimum campaign: 6 UGC videos (2 creators &times; 3 scripts)
                     </div>
                 </div>
 
@@ -205,10 +205,11 @@
     </div>
 
     <script>
-        const COST_PREMIUM_PER_CREATOR = 2000.00;
-        const COST_STANDARD_PER_CREATOR = 200.00;
+        const COST_PREMIUM_PER_VIDEO = 400.00;
+        const COST_STANDARD_PER_VIDEO = 100.00;   // $300 per creator (3 videos per creator)
         const PREMIUM_VIDEOS_PER_CREATOR = 4;
         const STANDARD_VIDEOS_PER_CREATOR = 3;
+        const MIN_STANDARD_VIDEOS = 6;            // minimum campaign: 2 creators x 3 scripts
         const COST_VARIATION = 20.00;
         const COST_STATIC = 15.00;
         const COST_AI_VIDEO = 300.00;
@@ -216,8 +217,12 @@
         let counts = { premium: 0, standard: 0, variation: 0, static: 0, aiVideo: 0 };
 
         function updateCount(type, change) {
-            const newVal = counts[type] + change;
+            let newVal = counts[type] + change;
             if (newVal < 0) return;
+            // Minimum campaign: standard jumps between 0 and 6 (2 creators x 3 scripts)
+            if (type === 'standard' && newVal > 0 && newVal < MIN_STANDARD_VIDEOS) {
+                newVal = change > 0 ? MIN_STANDARD_VIDEOS : 0;
+            }
             counts[type] = newVal;
             document.getElementById(`${type}-count`).value = counts[type];
             calculate();
@@ -228,8 +233,8 @@
             const totalVideos = totalConcepts * (1 + counts.variation);
             const totalCreators = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) + (counts.standard / STANDARD_VIDEOS_PER_CREATOR);
 
-            const cogsPremium = (counts.premium / PREMIUM_VIDEOS_PER_CREATOR) * COST_PREMIUM_PER_CREATOR;
-            const cogsStandard = (counts.standard / STANDARD_VIDEOS_PER_CREATOR) * COST_STANDARD_PER_CREATOR;
+            const cogsPremium = counts.premium * COST_PREMIUM_PER_VIDEO;
+            const cogsStandard = counts.standard * COST_STANDARD_PER_VIDEO;
             const cogsVariations = totalConcepts * counts.variation * COST_VARIATION;
             const cogsStatic = counts.static * COST_STATIC;
             const cogsAiVideo = counts.aiVideo * COST_AI_VIDEO;
